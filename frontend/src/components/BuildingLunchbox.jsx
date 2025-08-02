@@ -9,7 +9,7 @@ const BuildingLunchbox = ({ selectedItems = [] }) => {
                 <img
                     src={`/public/items/${item.id}.svg`}
                     alt={item.name}
-                    className="w-full h-full object-contain p-2"
+                    className="w-full h-full object-contain p-8"
                 />
             );
         }
