@@ -5,7 +5,7 @@ import ListingsPage from "./pages/ListingsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import TradingPage from "./pages/TradingPage";
 
-import { UserProvider } from './context/UserProvider'
+import { UserProvider } from "./context/UserProvider";
 
 function App() {
   return (
@@ -15,7 +15,6 @@ function App() {
         <Route path="/listings" element={<ListingsPage />} />
         <Route path="/trading" element={<TradingPage />} />
         <Route path="*" element={<NotFoundPage />} />
-
       </Routes>
     </UserProvider>
   );
