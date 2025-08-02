@@ -17,7 +17,6 @@ const ListingsPage = () => {
             try {
                 const data = await getAllLunchBoxes();
                 setLunchboxes(data);
-                console.log(data);
             } catch (error) {
                 console.error("Error fetching lunchboxes:", error);
                 setLunchboxes([]);
