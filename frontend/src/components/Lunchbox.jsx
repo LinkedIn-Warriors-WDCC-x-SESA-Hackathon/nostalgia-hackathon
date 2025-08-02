@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 const Lunchbox = ({
     primaryColor = "bg-purple-300",
@@ -7,6 +8,7 @@ const Lunchbox = ({
     className = "",
     items = [], // Array of items to display in the lunchbox
     boxColor = "bg-white bg-opacity-80", // Color of the internal compartment boxes
+    onMakeOffer = () => {}, // Callback for when "Make Offer" button is clicked
 }) => {
     // Size configurations
     const sizeConfig = {
@@ -35,14 +37,15 @@ const Lunchbox = ({
         tilt !== 0 ? { transform: `rotate(${tilt}deg)` } : {};
 
     return (
-        <div
-            className={`${primaryColor} ${config.container} ${config.padding} rounded-2xl shadow-lg ${className}`}
-            style={transformStyle}
-        >
-            {/* Grid layout for lunchbox compartments - 2 left boxes, 1 right box */}
-            <div className="flex gap-4 h-full">
-                {/* Left side - two stacked boxes */}
-                <div className="flex flex-col gap-4 w-1/3">
+        <div className="relative group">
+            <div
+                className={`${primaryColor} ${config.container} ${config.padding} rounded-2xl shadow-lg ${className}`}
+                style={transformStyle}
+            >
+                {/* Grid layout for lunchbox compartments - 2 left boxes, 1 right box */}
+                <div className="flex gap-4 h-full">
+                    {/* Left side - two stacked boxes */}
+                    <div className="flex flex-col gap-4 w-1/3">
                     {/* Top left box - item 1 */}
                     <div
                         className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
@@ -117,6 +120,21 @@ const Lunchbox = ({
                         </div>
                     </div>
                 </div>
+                </div>
+            </div>
+            
+            {/* Hover overlay with "Make Offer" button */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center"
+                 style={{
+                     ...transformStyle,
+                     background: `linear-gradient(rgba(243, 232, 210, 0.7), rgba(243, 232, 210, 0.7))`
+                 }}>
+                <Button 
+                    onClick={onMakeOffer}
+                    className="bg-orange hover:bg-orange-darker text-black font-bold px-8 py-4 text-lg"
+                >
+                    MAKE OFFER
+                </Button>
             </div>
         </div>
     );
