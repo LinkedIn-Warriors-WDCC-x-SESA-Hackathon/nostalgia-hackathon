@@ -11,13 +11,13 @@ const SetupPage = () => {
         <>
             <PageLayout title="Create your listing">
                 <div className="flex h-screen bg-beige">
-                    <div className="w-100 bg-beige-darkest">
+                    <div className="w-120 bg-beige-darkest">
                         <div className="bg-beige-darker p-4">
                             <div className="flex gap-4 mb-4">
-                                <img src={Logo} className="h-36"></img>
+                                <img src={Logo} className="h-30"></img>
                                 <img
                                     src={BearLunchTrading}
-                                    className="h-36"
+                                    className="h-30"
                                 ></img>
                             </div>
 
@@ -36,8 +36,10 @@ const SetupPage = () => {
                         </div>
                     </div>
 
-                    <div>
-                        <img src={BLT} className="h-50" />
+                    <div className="w-full">
+                        <div className="flex">
+                            <img src={BLT} className="h-50 ml-auto" />
+                        </div>
 
                         <BuildingLunchbox />
                     </div>
