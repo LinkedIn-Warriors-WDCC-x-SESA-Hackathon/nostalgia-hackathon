@@ -1,16 +1,11 @@
 import React from 'react';
+import PageLayout from '../components/PageLayout';
 
 const ListingsPage = () => {
   return (<>
-    <head>
-      <title>Listings</title>
-    </head>
-    <body>
-      <div>
-        <h1>Listings</h1>
-        <p>page with listings</p>
-      </div>
-    </body>
+    <PageLayout title="Lunchbox listings">
+      <p className="text-teal">Listing page</p>
+    </PageLayout>
   </>);
 }
 
