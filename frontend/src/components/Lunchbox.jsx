@@ -1,13 +1,4 @@
 import React from "react";
-// Import food item assets
-// import apple from "../assets/items/apple.svg";
-// import carrot from "../assets/items/carrot.svg";
-// import celery from "../assets/items/celery.svg";
-// import cheese from "../assets/items/cheese.svg";
-// import egg from "../assets/items/egg.svg";
-// import hummus from "../assets/items/hummus.svg";
-// import juice from "../assets/items/juice.svg";
-// import potatoChips from "../assets/items/potato chips.svg";
 
 const Lunchbox = ({
     primaryColor = "bg-purple-300",
@@ -37,14 +28,14 @@ const Lunchbox = ({
 
     // Map of available food items
     const foodAssets = {
-        // apple,
-        // carrot,
-        // celery,
-        // cheese,
-        // egg,
-        // hummus,
-        // juice,
-        // potatoChips
+        apple: "/items/apple.svg",
+        carrot: "/items/carrot.svg",
+        celery: "/items/celery.svg",
+        cheese: "/items/cheese.svg",
+        egg: "/items/egg.svg",
+        hummus: "/items/hummus.svg",
+        juice: "/items/juice.svg",
+        potatoChips: "/items/potato chips.svg",
     };
 
     // Default items if none provided
