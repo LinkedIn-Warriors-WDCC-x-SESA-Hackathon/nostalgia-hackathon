@@ -6,20 +6,50 @@ import BLT from "../assets/BLT.png";
 import BuildingLunchbox from "../components/BuildingLunchbox";
 import { useState } from "react";
 import Button from "../components/Button";
+import DisplayNameAlert from "../components/DisplayNameAlert";
 
 const SetupPage = () => {
     const foodItems = [
         { id: "apple", name: "Apple" },
+        { id: "bagel", name: "Bagel" },
+        { id: "banana", name: "Banana" },
+        { id: "biscuits", name: "Biscuits" },
+        { id: "candy", name: "Candy" },
         { id: "carrot", name: "Carrot" },
         { id: "celery", name: "Celery" },
         { id: "cheese", name: "Cheese" },
+        { id: "chocolate", name: "Chocolate" },
+        { id: "croissant", name: "Croissant" },
+        { id: "donut", name: "Donut" },
+        { id: "driedfruit", name: "Dried Fruit" },
         { id: "egg", name: "Egg" },
         { id: "hummus", name: "Hummus" },
+        { id: "jelly", name: "Jelly" },
         { id: "juice", name: "Juice" },
+        { id: "milkbox", name: "Milk Box" },
+        { id: "onigiri", name: "Onigiri" },
+        { id: "popcorn", name: "Popcorn" },
         { id: "potatochips", name: "Potato Chips" },
+        { id: "pretzels", name: "Pretzels" },
+        { id: "sandwich", name: "Sandwich" },
+        { id: "yogurt", name: "Yogurt" },
     ];
 
     const [selectedItems, setSelectedItems] = useState([]);
+
+    const [showDisplayNameAlert, setShowDisplayNameAlert] = useState(false);
+
+    const handleStartTradingClicked = () => {
+        setShowDisplayNameAlert(true);
+    };
+
+    const handleDisplayNameSubmit = () => {
+        // Go to listings page
+    };
+
+    const handleDisplayNameClose = () => {
+        setShowDisplayNameAlert(false);
+    };
 
     const handleItemClick = (item) => {
         const isAlreadySelected = selectedItems.find(
@@ -40,7 +70,7 @@ const SetupPage = () => {
     return (
         <PageLayout title="Create your listing">
             <div className="flex h-screen bg-beige">
-                <div className="w-120 bg-beige-darkest">
+                <div className="w-120 bg-beige-darkest flex flex-col">
                     <div className="bg-beige-darker p-4">
                         <div className="flex gap-4 mb-4">
                             <img src={Logo} className="h-30"></img>
@@ -54,7 +84,7 @@ const SetupPage = () => {
                         ></input>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 p-4">
+                    <div className="grid grid-cols-2 gap-4 p-4 overflow-y-auto flex-1">
                         {foodItems.map((item) => (
                             <LunchItem
                                 key={item.id}
@@ -82,10 +112,18 @@ const SetupPage = () => {
                     </div>
 
                     <div className="flex justify-end">
-                        <Button>Start trading</Button>
+                        <Button onClick={handleStartTradingClicked}>
+                            Start trading
+                        </Button>
                     </div>
                 </div>
             </div>
+
+            <DisplayNameAlert
+                show={showDisplayNameAlert}
+                onSubmit={handleDisplayNameSubmit}
+                onClose={handleDisplayNameClose}
+            />
         </PageLayout>
     );
 };
