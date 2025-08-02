@@ -36,8 +36,18 @@ const SetupPage = () => {
     ];
 
     const [selectedItems, setSelectedItems] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const [showDisplayNameAlert, setShowDisplayNameAlert] = useState(false);
+
+    // Filter food items based on search query
+    const filteredFoodItems = foodItems.filter((item) =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
 
     const handleStartTradingClicked = () => {
         setShowDisplayNameAlert(true);
@@ -81,11 +91,13 @@ const SetupPage = () => {
                             type="text"
                             className="bg-white p-2 rounded-full w-full my-2"
                             placeholder="Search..."
+                            value={searchQuery}
+                            onChange={handleSearchChange}
                         ></input>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 p-4 overflow-y-auto flex-1">
-                        {foodItems.map((item) => (
+                    <div className="grid grid-cols-2 gap-4 p-4 overflow-y-auto flex-1 auto-rows-min content-start">
+                        {filteredFoodItems.map((item) => (
                             <LunchItem
                                 key={item.id}
                                 name={item.name}
