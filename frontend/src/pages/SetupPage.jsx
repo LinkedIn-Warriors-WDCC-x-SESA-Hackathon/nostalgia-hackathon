@@ -1,4 +1,3 @@
-import PageLayout from "../components/PageLayout";
 import Logo from "../assets/Logo.png";
 import BearLunchTrading from "../assets/BearLunchTrading.png";
 import LunchItem from "../components/LunchItem";
@@ -11,6 +10,7 @@ import { submitLunchbox } from "../api/lunchboxApi";
 import { useNavigate } from "react-router-dom";
 
 const SetupPage = () => {
+    
     const foodItems = [
         { id: "apple", name: "Apple" },
         { id: "bagel", name: "Bagel" },
@@ -41,6 +41,7 @@ const SetupPage = () => {
     const [searchQuery, setSearchQuery] = useState("");
 
     const [showDisplayNameAlert, setShowDisplayNameAlert] = useState(false);
+    const [displayName, setDisplayName] = useState("");
 
     // Filter food items based on search query
     const filteredFoodItems = foodItems.filter((item) =>
@@ -94,9 +95,9 @@ const SetupPage = () => {
             setSelectedItems([...selectedItems, item]);
         }
     };
+    
+    return (<>
 
-    return (
-        <PageLayout title="Create your listing">
             <div className="flex h-screen bg-beige">
                 <div className="w-120 bg-beige-darkest flex flex-col">
                     <div className="bg-beige-darker p-4">
@@ -153,9 +154,11 @@ const SetupPage = () => {
                 show={showDisplayNameAlert}
                 onSubmit={handleDisplayNameSubmit}
                 onClose={handleDisplayNameClose}
+                displayName={displayName}
+                setDisplayName={setDisplayName}
             />
-        </PageLayout>
-    );
+
+    </>);
 };
 
 export default SetupPage;
