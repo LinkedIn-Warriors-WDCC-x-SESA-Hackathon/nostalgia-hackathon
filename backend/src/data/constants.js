@@ -1,17 +1,13 @@
-// Predefined item list for lunchboxes
+// Predefined item list for lunchboxes (functional items only)
 export const PREDEFINED_ITEMS = [
-  'apple',
-  'banana',
-  'carrot',
-  'sandwich',
+  'celery-sticks',
+  'carrot-sticks', 
+  'hummus',
+  'hard-boiled egg',
   'chips',
-  'cookies',
-  'orange',
-  'grapes',
-  'cheese',
-  'crackers',
-  'yogurt',
-  'juice box'
+  'cheese sticks',
+  'juice box',
+  'cookies'
 ];
 
 // Maximum number of items allowed in a lunchbox
