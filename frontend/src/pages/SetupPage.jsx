@@ -2,6 +2,7 @@ import React from "react";
 import PageLayout from "../components/PageLayout";
 import Logo from "../assets/Logo.png";
 import BearLunchTrading from "../assets/BearLunchTrading.png";
+import LunchItem from "../components/LunchItem";
 
 const SetupPage = () => {
     return (
@@ -25,13 +26,12 @@ const SetupPage = () => {
                             ></input>
                         </div>
 
-                        <h1 className="text-teal-darker font-sans">
-                            setup page
-                        </h1>
-                        <p>
-                            big lunchbox (item adding/setup panel thing) and
-                            display name form with submit button
-                        </p>
+                        <div className="grid grid-cols-2 gap-4">
+                            <LunchItem></LunchItem>
+                            <LunchItem></LunchItem>
+                            <LunchItem></LunchItem>
+                            <LunchItem></LunchItem>
+                        </div>
                     </div>
                 </div>
             </PageLayout>
