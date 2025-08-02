@@ -1,12 +1,23 @@
 import React from 'react';
 import PageLayout from '../components/PageLayout';
+import Logo from '../assets/Logo.png';
+import BearLunchTrading from '../assets/BearLunchTrading.png';
 
 const SetupPage = () => {
   return (<>
     <PageLayout title="Create your listing">
-      <div>
-        <h1 className="text-teal-darker font-sans">setup page</h1>
-        <p>big lunchbox (item adding/setup panel thing) and display name form with submit button</p>
+      <div className="flex h-screen">
+        
+        <div className="w-100 bg-beige-darkest">
+
+          <div className="bg-beige-darker flex gap-4 p-4">
+            <img src={Logo} className="h-36"></img>
+            <img src={BearLunchTrading} className="h-36"></img>
+          </div>
+
+          <h1 className="text-teal-darker font-sans">setup page</h1>
+          <p>big lunchbox (item adding/setup panel thing) and display name form with submit button</p>
+        </div>
       </div>
     </PageLayout>
   </>);
