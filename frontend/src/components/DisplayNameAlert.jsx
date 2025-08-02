@@ -29,7 +29,7 @@ const DisplayNameAlert = ({ show, onSubmit, onClose, displayName, setDisplayName
                     />
                     <button
                         className="bg-yellow text-black rounded-full px-4 py-2 mt-8 w-50"
-                        onClick={onSubmit}
+                        onClick={() => onSubmit(displayName)}
                     >
                         Submit
                     </button>
