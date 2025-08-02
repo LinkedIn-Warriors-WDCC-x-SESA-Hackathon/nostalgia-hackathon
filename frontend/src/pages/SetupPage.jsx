@@ -6,6 +6,7 @@ import BLT from "../assets/BLT.png";
 import BuildingLunchbox from "../components/BuildingLunchbox";
 import { useState } from "react";
 import Button from "../components/Button";
+import DisplayNameAlert from "../components/DisplayNameAlert";
 
 const SetupPage = () => {
     const foodItems = [
@@ -20,6 +21,16 @@ const SetupPage = () => {
     ];
 
     const [selectedItems, setSelectedItems] = useState([]);
+
+    const [showDisplayNameAlert, setShowDisplayNameAlert] = useState(false);
+
+    const handleStartTradingClicked = () => {
+        setShowDisplayNameAlert(true);
+    };
+
+    const handleDisplayNameSubmit = () => {
+        // Go to listings page
+    };
 
     const handleItemClick = (item) => {
         const isAlreadySelected = selectedItems.find(
@@ -82,10 +93,17 @@ const SetupPage = () => {
                     </div>
 
                     <div className="flex justify-end">
-                        <Button>Start trading</Button>
+                        <Button onClick={handleStartTradingClicked}>
+                            Start trading
+                        </Button>
                     </div>
                 </div>
             </div>
+
+            <DisplayNameAlert
+                show={showDisplayNameAlert}
+                onSubmit={handleDisplayNameSubmit}
+            />
         </PageLayout>
     );
 };
