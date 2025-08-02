@@ -1,7 +1,7 @@
 import React from "react";
 
 // Lunchbox for "build your lunch box" page
-const BuildingLunchbox = ({ selectedItems = [] }) => {
+const BuildingLunchbox = ({ selectedItems = [], onItemClick }) => {
     // Helper function to render an item or empty slot
     const renderItem = (item) => {
         if (item) {
@@ -9,7 +9,8 @@ const BuildingLunchbox = ({ selectedItems = [] }) => {
                 <img
                     src={`/public/items/${item.id}.svg`}
                     alt={item.name}
-                    className="w-full h-full object-contain p-8"
+                    className="w-full h-full object-contain p-8 cursor-pointer hover:opacity-75 transition-opacity"
+                    onClick={() => onItemClick(item)}
                 />
             );
         }
