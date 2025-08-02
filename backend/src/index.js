@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 import lunchboxRouter from './routes/lunchbox.js'
+import offerRouter from './routes/offer.js'
 
 // Middleware
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/lunchboxes', lunchboxRouter)
+app.use('/offers', offerRouter)
 
 // Start server
 app.listen(PORT, () => {

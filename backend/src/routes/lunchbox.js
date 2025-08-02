@@ -4,7 +4,7 @@ import { lunchboxes } from '../store.js'
 
 const router = express.Router();
 
-// GET /lunchbox/:name
+// GET /lunchboxes/:name
 // Get a lunchbox by name
 router.get('/:name', (req, res) => {
   const lunchbox = lunchboxes.get(req.params.name)
@@ -15,7 +15,7 @@ router.get('/:name', (req, res) => {
   }
 });
 
-// GET /lunchbox
+// GET /lunchboxes
 // Get all lunchboxes listed in the marketplace
 router.get('', (req, res) => {
   const lunchboxesFormatted = []
@@ -28,7 +28,7 @@ router.get('', (req, res) => {
   res.status(200).send(lunchboxesFormatted)
 });
 
-// POST /lunchbox
+// POST /lunchboxes
 // Create a new lunchbox
 router.post('/', (req, res) => {
   const name = req.body.name
