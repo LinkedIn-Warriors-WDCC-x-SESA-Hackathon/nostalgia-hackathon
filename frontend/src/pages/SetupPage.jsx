@@ -65,7 +65,7 @@ const SetupPage = () => {
                     </div>
                 </div>
 
-                <div className="w-full mx-8">
+                <div className="w-full mx-8 flex flex-col h-full">
                     <div className="flex justify-between my-4">
                         <p className="text-2xl mt-12">
                             Set up your lunchbox listing!
@@ -73,10 +73,12 @@ const SetupPage = () => {
                         <img src={BLT} className="h-30" />
                     </div>
 
-                    <BuildingLunchbox
-                        selectedItems={selectedItems}
-                        onItemClick={handleItemClick}
-                    />
+                    <div className="flex-1 flex items-center">
+                        <BuildingLunchbox
+                            selectedItems={selectedItems}
+                            onItemClick={handleItemClick}
+                        />
+                    </div>
                 </div>
             </div>
         </PageLayout>
