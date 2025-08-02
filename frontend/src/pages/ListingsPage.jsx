@@ -3,10 +3,13 @@ import longformBLT from '../assets/longformBLT.png';
 import Logo from '../assets/Logo.png';
 import Button from '../components/Button';
 import NotificationIcon from '../components/NotificationIcon';
+import PageLayout from '../components/PageLayout';
+import Lunchbox from '../components/Lunchbox';
 
 const ListingsPage = () => {
  
   return (
+    <PageLayout title="Listings">
     <div className="min-h-screen bg-beige">
       <div className=" h-[124px] bg-beige-darker flex items-center px-4">
         <img src={Logo} alt="Logo" className="h-auto max-h-[80px] object-contain" />
@@ -28,7 +31,36 @@ const ListingsPage = () => {
         </Button>
       </div>
       
+      {/* Sample lunchboxes with different colors and tilts - stacked vertically between notification and button */}
+      <div className="flex flex-col items-center justify-start mt-16 mx-4 px-20">
+        {/* Purple lunchbox - default */}
+        <Lunchbox 
+          primaryColor="bg-purple-300"
+          tilt={0}
+          size="medium"
+        />
+        
+        {/* Blue lunchbox - tilted left */}
+        <div className="mt-24">
+          <Lunchbox 
+            primaryColor="bg-blue-300"
+            tilt={-5}
+            size="medium"
+          />
+        </div>
+        
+        {/* Green lunchbox - tilted right - extra spacing */}
+        <div className="mt-32">
+          <Lunchbox 
+            primaryColor="bg-green-300"
+            tilt={5}
+            size="medium"
+          />
+        </div>
+      </div>
+      
     </div>
+    </PageLayout>
   );
 }
 
