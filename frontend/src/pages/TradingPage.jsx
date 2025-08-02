@@ -1,11 +1,11 @@
 import React from "react";
 import longformBLT from "../assets/longformBLT.png";
 import Logo from "../assets/Logo.png";
-import PageLayout from "../components/PageLayout";
+
 
 const TradingPage = () => {
   return (
-    <PageLayout title="Trading Page">
+
       <div className="min-h-screen bg-beige">
         <div className=" h-[124px] bg-beige-darker flex items-center px-4">
           <img
@@ -57,7 +57,7 @@ const TradingPage = () => {
         </div>
         <div className=""></div>
       </div>
-    </PageLayout>
+
   );
 };
 
