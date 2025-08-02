@@ -1,0 +1,24 @@
+{
+  "name": "nostalgia-hackathon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LinkedIn-Warriors-WDCC-x-SESA-Hackathon/nostalgia-hackathon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LinkedIn-Warriors-WDCC-x-SESA-Hackathon/nostalgia-hackathon/issues"
+  },
+  "homepage": "https://github.com/LinkedIn-Warriors-WDCC-x-SESA-Hackathon/nostalgia-hackathon#readme",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
