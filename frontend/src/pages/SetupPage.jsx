@@ -4,6 +4,7 @@ import BearLunchTrading from "../assets/BearLunchTrading.png";
 import LunchItem from "../components/LunchItem";
 import BLT from "../assets/BLT.png";
 import BuildingLunchbox from "../components/BuildingLunchbox";
+import { useState } from "react";
 
 const SetupPage = () => {
     const foodItems = [
@@ -16,6 +17,15 @@ const SetupPage = () => {
         { id: "juice", name: "Juice" },
         { id: "potatochips", name: "Potato Chips" },
     ];
+
+    const [selectedItems, setSelectedItems] = useState([]);
+
+    const handleItemClick = (item) => {
+        if (!selectedItems.find((selected) => selected.id === item.id)) {
+            setSelectedItems([...selectedItems, item]);
+        }
+    };
+
     return (
         <>
             <PageLayout title="Create your listing">
@@ -40,8 +50,10 @@ const SetupPage = () => {
                         <div className="grid grid-cols-2 gap-4 p-4">
                             {foodItems.map((item) => (
                                 <LunchItem
+                                    key={item.id}
                                     name={item.name}
                                     image={`/public/items/${item.id}.svg`}
+                                    onClick={() => handleItemClick(item)}
                                 />
                             ))}
                         </div>
@@ -55,7 +67,7 @@ const SetupPage = () => {
                             <img src={BLT} className="h-30" />
                         </div>
 
-                        <BuildingLunchbox />
+                        <BuildingLunchbox selectedItems={selectedItems} />
                     </div>
                 </div>
             </PageLayout>
