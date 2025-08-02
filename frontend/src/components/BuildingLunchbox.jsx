@@ -18,7 +18,7 @@ const BuildingLunchbox = ({ selectedItems = [], onItemClick }) => {
     };
 
     return (
-        <div className="bg-teal-darker w-full aspect-[8/5] rounded-2xl flex p-8">
+        <div className="bg-teal-darker w-full aspect-[8/5] rounded-2xl flex p-8 m-16">
             <div className="w-1/3 pr-8 flex flex-col gap-8">
                 {/* First item */}
                 <div className="bg-teal h-1/2 rounded-2xl flex items-center justify-center relative">

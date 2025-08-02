@@ -5,6 +5,7 @@ import LunchItem from "../components/LunchItem";
 import BLT from "../assets/BLT.png";
 import BuildingLunchbox from "../components/BuildingLunchbox";
 import { useState } from "react";
+import Button from "../components/Button";
 
 const SetupPage = () => {
     const foodItems = [
@@ -73,11 +74,15 @@ const SetupPage = () => {
                         <img src={BLT} className="h-30" />
                     </div>
 
-                    <div className="flex-1 flex items-center">
+                    <div className="flex items-center">
                         <BuildingLunchbox
                             selectedItems={selectedItems}
                             onItemClick={handleItemClick}
                         />
+                    </div>
+
+                    <div className="flex justify-end">
+                        <Button>Start trading</Button>
                     </div>
                 </div>
             </div>
