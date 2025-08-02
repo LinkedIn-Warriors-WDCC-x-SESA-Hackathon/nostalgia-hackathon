@@ -28,11 +28,11 @@ const SetupPage = () => {
                             ></input>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            <LunchItem></LunchItem>
-                            <LunchItem></LunchItem>
-                            <LunchItem></LunchItem>
-                            <LunchItem></LunchItem>
+                        <div className="grid grid-cols-2 gap-4 p-4">
+                            <LunchItem name="Apple" image=""></LunchItem>
+                            <LunchItem name="Banana" image=""></LunchItem>
+                            <LunchItem name="Celery" image=""></LunchItem>
+                            <LunchItem name="Cookies" image=""></LunchItem>
                         </div>
                     </div>
 
