@@ -80,7 +80,7 @@ const ListingsPage = () => {
                             primaryColor="bg-teal-darker"
                             tilt={-5}
                             size="medium"
-                            items={["egg", "hummus", "celery", "potatoChips"]}
+                            items={["egg", "hummus", "celery", "potatochips"]}
                             boxColor="bg-teal"
                         />
                     </div>

@@ -42,8 +42,8 @@ const Lunchbox = ({
             {/* Grid layout for lunchbox compartments - 2 left boxes, 1 right box */}
             <div className="flex gap-4 h-full">
                 {/* Left side - two stacked boxes */}
-                <div className="flex-1 flex flex-col gap-4">
-                    {/* Top left box */}
+                <div className="flex flex-col gap-4 w-1/3">
+                    {/* Top left box - item 1 */}
                     <div
                         className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
                     >
@@ -51,34 +51,71 @@ const Lunchbox = ({
                             <img
                                 src={"/items/" + displayItems[0] + ".svg"}
                                 alt={displayItems[0]}
-                                className="w-16 h-16 object-contain"
+                                className="w-24 h-24 object-contain"
                             />
                         )}
                     </div>
-                    {/* Bottom left box */}
+                    {/* Bottom left box - item 4 */}
                     <div
                         className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
                     >
-                        {displayItems[1] && (
+                        {displayItems[3] && (
                             <img
-                                src={"/items/" + displayItems[1] + ".svg"}
-                                alt={displayItems[1]}
-                                className="w-16 h-16 object-contain"
+                                src={"/items/" + displayItems[3] + ".svg"}
+                                alt={displayItems[3]}
+                                className="w-24 h-24 object-contain"
                             />
                         )}
                     </div>
                 </div>
-                {/* Right side - one large box */}
-                <div
-                    className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
-                >
-                    {displayItems[2] && (
-                        <img
-                            src={"/items/" + displayItems[2] + ".svg"}
-                            alt={displayItems[2]}
-                            className="w-20 h-20 object-contain"
-                        />
-                    )}
+                {/* Right side - one large box divided into top and bottom halves */}
+                <div className="flex flex-col gap-4 w-2/3">
+                    {/* Top half - items 2 and 3 */}
+                    <div
+                        className={`flex-1 ${boxColor} rounded-xl flex p-4 shadow-inner`}
+                    >
+                        <div className="flex-1 flex items-center justify-center">
+                            {displayItems[1] && (
+                                <img
+                                    src={"/items/" + displayItems[1] + ".svg"}
+                                    alt={displayItems[1]}
+                                    className="w-24 h-24 object-contain"
+                                />
+                            )}
+                        </div>
+                        <div className="flex-1 flex items-center justify-center">
+                            {displayItems[2] && (
+                                <img
+                                    src={"/items/" + displayItems[2] + ".svg"}
+                                    alt={displayItems[2]}
+                                    className="w-24 h-24 object-contain"
+                                />
+                            )}
+                        </div>
+                    </div>
+                    {/* Bottom half - items 5 and 6 */}
+                    <div
+                        className={`flex-1 ${boxColor} rounded-xl flex p-4 shadow-inner`}
+                    >
+                        <div className="flex-1 flex items-center justify-center">
+                            {displayItems[4] && (
+                                <img
+                                    src={"/items/" + displayItems[4] + ".svg"}
+                                    alt={displayItems[4]}
+                                    className="w-24 h-24 object-contain"
+                                />
+                            )}
+                        </div>
+                        <div className="flex-1 flex items-center justify-center">
+                            {displayItems[5] && (
+                                <img
+                                    src={"/items/" + displayItems[5] + ".svg"}
+                                    alt={displayItems[5]}
+                                    className="w-24 h-24 object-contain"
+                                />
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
