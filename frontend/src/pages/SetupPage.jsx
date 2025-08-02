@@ -48,9 +48,12 @@ const SetupPage = () => {
                         </div>
                     </div>
 
-                    <div className="w-full">
-                        <div className="flex">
-                            <img src={BLT} className="h-50 ml-auto" />
+                    <div className="w-full mx-8">
+                        <div className="flex justify-between my-4">
+                            <p className="text-2xl mt-12">
+                                Set up your lunchbox listing!
+                            </p>
+                            <img src={BLT} className="h-30" />
                         </div>
 
                         <BuildingLunchbox />
