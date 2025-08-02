@@ -3,7 +3,7 @@ import longformBLT from "../assets/longformBLT.png";
 import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
 import NotificationIcon from "../components/NotificationIcon";
-import PageLayout from "../components/PageLayout";
+
 import Lunchbox from "../components/Lunchbox";
 import { useState, useEffect } from "react";
 import { getAllLunchBoxes } from "../api/lunchboxApi";
@@ -32,7 +32,7 @@ const ListingsPage = () => {
     }, []);
 
     return (
-        <PageLayout title="Listings">
+
             <div className="min-h-screen bg-beige pb-16">
                 <div className=" h-[124px] bg-beige-darker flex items-center px-4">
                     <img
@@ -97,7 +97,7 @@ const ListingsPage = () => {
                     </div>
                 </div>
             </div>
-        </PageLayout>
+
     );
 };
 

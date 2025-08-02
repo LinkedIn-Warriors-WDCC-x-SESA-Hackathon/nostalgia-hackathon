@@ -37,20 +37,9 @@ router.get('/', (req, res) => {
     res.status(200).send(offerList)
 });
 
-// POST /offers
-// Create a new offer
-router.post('/', (req, res) => {
-  const offer = req.body
-  const currentDate = new Date().toISOString() // used as unique ID
-
-  offers.set(currentDate, offer)
-
-  res.status(200).end()
-})
-
 // POST /offers/:id/accept
 // Accept an offer
-router.post('/offers/:id/accept', (req, res) => {
+router.post('/:id/accept', (req, res) => {
     const offer = offers.get(req.params.id)
     if (!offer) {
         res.status(404).end()
@@ -58,28 +47,28 @@ router.post('/offers/:id/accept', (req, res) => {
         const senderLunchbox = lunchboxes.get(offer.sender)
         const receiverLunchbox = lunchboxes.get(offer.receiver)
         if (!senderLunchbox || !receiverLunchbox) { return res.status(500).end() }
-        senderLunchbox.push(offer.wanting)
-        receiverLunchbox.push(offer.offering)
+        senderLunchbox.push(...offer.wanting)
+        receiverLunchbox.push(...offer.offering)
         offer.offering.forEach(foodItem => {
-            const index = items.indexOf(foodItem);
-            if (index !== -1) {
-                receiverLunchbox.splice(index, 1);
-            }
-        })
-        offer.wanting.forEach(foodItem => {
-            const index = items.indexOf(foodItem);
+            const index = senderLunchbox.indexOf(foodItem);
             if (index !== -1) {
                 senderLunchbox.splice(index, 1);
             }
         })
-        offers.delete(id)
+        offer.wanting.forEach(foodItem => {
+            const index = receiverLunchbox.indexOf(foodItem);
+            if (index !== -1) {
+                receiverLunchbox.splice(index, 1);
+            }
+        })
+        offers.delete(req.params.id)
         res.status(200).end()
     }
 })
 
 // POST /offers/:id/decline
 // Decline an offer
-router.post('/offers/:id/decline', (req, res) => {
+router.post('/:id/decline', (req, res) => {
     const offer = offers.get(req.params.id)
     if (!offer) {
         res.status(404).end()
@@ -87,6 +76,17 @@ router.post('/offers/:id/decline', (req, res) => {
         offers.delete(id)
         res.status(200).end()
     }
+})
+
+// POST /offers
+// Create a new offer
+router.post('/', (req, res) => {
+  const offer = req.body
+  const randomString = Math.random().toString(36).slice(2)
+
+  offers.set(randomString, offer)
+
+  res.status(200).end()
 })
 
 export default router
