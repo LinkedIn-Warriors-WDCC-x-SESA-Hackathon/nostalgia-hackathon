@@ -1,12 +1,17 @@
 import React from 'react';
 
 const ListingsPage = () => {
-  return (
-    <div>
-      <h1>Listings</h1>
-      <p>page with listings</p>
-    </div>
-  );
+  return (<>
+    <head>
+      <title>Listings</title>
+    </head>
+    <body>
+      <div>
+        <h1>Listings</h1>
+        <p>page with listings</p>
+      </div>
+    </body>
+  </>);
 }
 
 export default ListingsPage
