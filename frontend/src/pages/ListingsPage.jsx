@@ -10,7 +10,7 @@ const ListingsPage = () => {
  
   return (
     <PageLayout title="Listings">
-    <div className="min-h-screen bg-beige">
+    <div className="min-h-screen bg-beige pb-16">
       <div className=" h-[124px] bg-beige-darker flex items-center px-4">
         <img src={Logo} alt="Logo" className="h-auto max-h-[80px] object-contain" />
         <div className="flex-1 flex justify-center mr-160">
@@ -19,13 +19,13 @@ const ListingsPage = () => {
         <div className="w-[120px]"></div>
       </div>
       
-      {/* Fixed notification icon on the left side */}
-      <div className="fixed top-[124px] left-6 z-50 mt-4">
+      {/* Notification icon on the left side */}
+      <div className="absolute top-[124px] left-6 z-50 mt-4">
         <NotificationIcon count={3} />
       </div>
       
-      {/* Fixed button on the right side */}
-      <div className="fixed top-[124px] right-6 z-50 mt-4">
+      {/* Button on the right side */}
+      <div className="absolute top-[124px] right-6 z-50 mt-4">
         <Button>
           EDIT LUNCHBOX
         </Button>
@@ -35,7 +35,7 @@ const ListingsPage = () => {
       <div className="flex flex-col items-center justify-start mt-16 mx-4 px-20">
         {/* Purple lunchbox - default */}
         <Lunchbox 
-          primaryColor="bg-purple-300"
+          primaryColor="bg-purple-darker"
           tilt={0}
           size="medium"
         />
@@ -43,7 +43,7 @@ const ListingsPage = () => {
         {/* Blue lunchbox - tilted left */}
         <div className="mt-24">
           <Lunchbox 
-            primaryColor="bg-blue-300"
+            primaryColor="bg-teal"
             tilt={-5}
             size="medium"
           />
@@ -52,7 +52,7 @@ const ListingsPage = () => {
         {/* Green lunchbox - tilted right - extra spacing */}
         <div className="mt-32">
           <Lunchbox 
-            primaryColor="bg-green-300"
+            primaryColor="bg-[#DF9D9E]"
             tilt={5}
             size="medium"
           />
