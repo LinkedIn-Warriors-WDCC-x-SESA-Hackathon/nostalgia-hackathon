@@ -38,23 +38,29 @@ const ListingsPage = () => {
           primaryColor="bg-purple-darker"
           tilt={0}
           size="medium"
+          items={['apple', 'cheese', 'carrot', 'juice']}
+          boxColor="bg-[#E6D8ED]"
         />
         
         {/* Blue lunchbox - tilted left */}
         <div className="mt-24">
           <Lunchbox 
-            primaryColor="bg-teal"
+            primaryColor="bg-teal-darker"
             tilt={-5}
             size="medium"
+            items={['egg', 'hummus', 'celery', 'potatoChips']}
+            boxColor="bg-teal"
           />
         </div>
         
-        {/* Green lunchbox - tilted right - extra spacing */}
+        {/* Pink lunchbox - tilted right - extra spacing */}
         <div className="mt-32">
           <Lunchbox 
             primaryColor="bg-[#DF9D9E]"
             tilt={5}
             size="medium"
+            items={['cheese', 'apple', 'juice', 'carrot']}
+            boxColor="bg-[#F3D4D4]"
           />
         </div>
       </div>
