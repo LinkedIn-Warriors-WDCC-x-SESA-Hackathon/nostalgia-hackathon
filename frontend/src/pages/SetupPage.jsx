@@ -32,6 +32,10 @@ const SetupPage = () => {
         // Go to listings page
     };
 
+    const handleDisplayNameClose = () => {
+        setShowDisplayNameAlert(false);
+    };
+
     const handleItemClick = (item) => {
         const isAlreadySelected = selectedItems.find(
             (selected) => selected.id === item.id
@@ -103,6 +107,7 @@ const SetupPage = () => {
             <DisplayNameAlert
                 show={showDisplayNameAlert}
                 onSubmit={handleDisplayNameSubmit}
+                onClose={handleDisplayNameClose}
             />
         </PageLayout>
     );
