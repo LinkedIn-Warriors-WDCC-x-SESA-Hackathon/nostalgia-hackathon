@@ -7,6 +7,8 @@ import BuildingLunchbox from "../components/BuildingLunchbox";
 import { useState } from "react";
 import Button from "../components/Button";
 import DisplayNameAlert from "../components/DisplayNameAlert";
+import { submitLunchbox } from "../api/lunchboxApi";
+import { useNavigate } from "react-router-dom";
 
 const SetupPage = () => {
     const foodItems = [
@@ -53,8 +55,24 @@ const SetupPage = () => {
         setShowDisplayNameAlert(true);
     };
 
-    const handleDisplayNameSubmit = () => {
-        // Go to listings page
+    const navigate = useNavigate();
+
+    const handleDisplayNameSubmit = async (displayName) => {
+        try {
+            // Convert selectedItems to array of item IDs for the API
+            const lunchboxItems = selectedItems.map((item) => item.id);
+
+            // Submit the lunchbox to the API
+            await submitLunchbox(displayName, lunchboxItems);
+
+            // Close the modal and navigate to listings page
+            setShowDisplayNameAlert(false);
+            // TODO: Navigate to listings page
+            navigate("/listings");
+        } catch (error) {
+            console.error("Error submitting lunchbox:", error);
+            // You might want to show an error message to the user here
+        }
     };
 
     const handleDisplayNameClose = () => {
