@@ -28,8 +28,8 @@ const ListingsPage = () => {
     }, []);
 
     // Handler for when a user wants to make an offer
-    const handleMakeOffer = (lunchboxIndex) => {
-        console.log(`Making offer for lunchbox ${lunchboxIndex}`);
+    const handleMakeOffer = (lunchboxName) => {
+        console.log(`Making offer for ${lunchboxName}'s lunchbox`);
         // TODO: Navigate to offer page or show offer modal
     };
 
@@ -71,6 +71,7 @@ const ListingsPage = () => {
                             size="medium"
                             items={lunchbox.lunchbox}
                             boxColor={`bg-[#E6D8ED]`}
+                            onMakeOffer={() => handleMakeOffer(lunchbox.name)}
                         />
                     </div>
                 ))}
@@ -83,7 +84,7 @@ const ListingsPage = () => {
                         size="medium"
                         items={["egg", "hummus", "celery", "potatoChips"]}
                         boxColor="bg-teal"
-                        onMakeOffer={() => handleMakeOffer(2)}
+                        onMakeOffer={() => handleMakeOffer("Alice")}
                     />
                 </div>
 
@@ -95,7 +96,7 @@ const ListingsPage = () => {
                         size="medium"
                         items={["cheese", "apple", "juice", "carrot"]}
                         boxColor="bg-[#F3D4D4]"
-                        onMakeOffer={() => handleMakeOffer(3)}
+                        onMakeOffer={() => handleMakeOffer("Bob")}
                     />
                 </div>
             </div>
