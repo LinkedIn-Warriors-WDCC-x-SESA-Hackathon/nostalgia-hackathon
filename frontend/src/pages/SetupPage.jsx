@@ -1,4 +1,3 @@
-import React from "react";
 import PageLayout from "../components/PageLayout";
 import Logo from "../assets/Logo.png";
 import BearLunchTrading from "../assets/BearLunchTrading.png";
@@ -7,6 +6,16 @@ import BLT from "../assets/BLT.png";
 import BuildingLunchbox from "../components/BuildingLunchbox";
 
 const SetupPage = () => {
+    const foodItems = [
+        { id: "apple", name: "Apple" },
+        { id: "carrot", name: "Carrot" },
+        { id: "celery", name: "Celery" },
+        { id: "cheese", name: "Cheese" },
+        { id: "egg", name: "Egg" },
+        { id: "hummus", name: "Hummus" },
+        { id: "juice", name: "Juice" },
+        { id: "potatochips", name: "Potato Chips" },
+    ];
     return (
         <>
             <PageLayout title="Create your listing">
@@ -29,22 +38,12 @@ const SetupPage = () => {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 p-4">
-                            <LunchItem
-                                name="Apple"
-                                image="/public/items/apple.svg"
-                            ></LunchItem>
-                            <LunchItem
-                                name="Carrot"
-                                image="/public/items/carrot.svg"
-                            ></LunchItem>
-                            <LunchItem
-                                name="Celery"
-                                image="/public/items/celery.svg"
-                            ></LunchItem>
-                            <LunchItem
-                                name="Cheese"
-                                image="/public/items/cheese.svg"
-                            ></LunchItem>
+                            {foodItems.map((item) => (
+                                <LunchItem
+                                    name={item.name}
+                                    image={`/public/items/${item.id}.svg`}
+                                />
+                            ))}
                         </div>
                     </div>
 
