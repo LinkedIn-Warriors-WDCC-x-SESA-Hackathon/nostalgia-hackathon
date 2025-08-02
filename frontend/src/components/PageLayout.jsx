@@ -6,7 +6,7 @@ const StandardHeadImports = ({title, children}) => {
             <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
             <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet"/>
         </head>
-        <body>
+        <body className="text-sans">
             {children}
         </body>
         
