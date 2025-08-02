@@ -29,10 +29,22 @@ const SetupPage = () => {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 p-4">
-                            <LunchItem name="Apple" image=""></LunchItem>
-                            <LunchItem name="Banana" image=""></LunchItem>
-                            <LunchItem name="Celery" image=""></LunchItem>
-                            <LunchItem name="Cookies" image=""></LunchItem>
+                            <LunchItem
+                                name="Apple"
+                                image="/public/items/apple.svg"
+                            ></LunchItem>
+                            <LunchItem
+                                name="Carrot"
+                                image="/public/items/carrot.svg"
+                            ></LunchItem>
+                            <LunchItem
+                                name="Celery"
+                                image="/public/items/celery.svg"
+                            ></LunchItem>
+                            <LunchItem
+                                name="Cheese"
+                                image="/public/items/cheese.svg"
+                            ></LunchItem>
                         </div>
                     </div>
 
