@@ -26,18 +26,6 @@ const Lunchbox = ({
 
     const config = sizeConfig[size];
 
-    // Map of available food items
-    const foodAssets = {
-        apple: "/items/apple.svg",
-        carrot: "/items/carrot.svg",
-        celery: "/items/celery.svg",
-        cheese: "/items/cheese.svg",
-        egg: "/items/egg.svg",
-        hummus: "/items/hummus.svg",
-        juice: "/items/juice.svg",
-        potatoChips: "/items/potato chips.svg",
-    };
-
     // Default items if none provided
     const defaultItems = ["apple", "cheese", "carrot", "juice"];
     const displayItems = items.length > 0 ? items : defaultItems;
@@ -59,9 +47,9 @@ const Lunchbox = ({
                     <div
                         className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
                     >
-                        {foodAssets[displayItems[0]] && (
+                        {displayItems[0] && (
                             <img
-                                src={foodAssets[displayItems[0]]}
+                                src={"/items/" + displayItems[0] + ".svg"}
                                 alt={displayItems[0]}
                                 className="w-16 h-16 object-contain"
                             />
@@ -71,9 +59,9 @@ const Lunchbox = ({
                     <div
                         className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
                     >
-                        {foodAssets[displayItems[1]] && (
+                        {displayItems[1] && (
                             <img
-                                src={foodAssets[displayItems[1]]}
+                                src={"/items/" + displayItems[1] + ".svg"}
                                 alt={displayItems[1]}
                                 className="w-16 h-16 object-contain"
                             />
@@ -84,9 +72,9 @@ const Lunchbox = ({
                 <div
                     className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
                 >
-                    {foodAssets[displayItems[2]] && (
+                    {displayItems[2] && (
                         <img
-                            src={foodAssets[displayItems[2]]}
+                            src={"/items/" + displayItems[2] + ".svg"}
                             alt={displayItems[2]}
                             className="w-20 h-20 object-contain"
                         />

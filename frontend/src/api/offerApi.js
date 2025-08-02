@@ -1,4 +1,4 @@
-import api from 'axios.js'
+import api from './axios.js'
 
 /* Get all offers in the format:
     [
