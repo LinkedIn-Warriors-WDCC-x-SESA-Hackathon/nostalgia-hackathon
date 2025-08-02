@@ -31,9 +31,9 @@ const itemImages = {
 
 const TradingPage = () => {
   return (
-    <PageLayout title="Trading Page">
-      <div className="min-h-screen bg-beige z-0 relative">
-        <div className="h-[124px] bg-beige-darker flex items-center px-4">
+
+      <div className="min-h-screen bg-beige">
+        <div className=" h-[124px] bg-beige-darker flex items-center px-4">
           <img
             src={Logo}
             alt="Logo"
@@ -159,7 +159,7 @@ const TradingPage = () => {
           <Button>Make Offer</Button>
         </div>
       </div>
-    </PageLayout>
+
   );
 };
 

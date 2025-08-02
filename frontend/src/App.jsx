@@ -5,16 +5,18 @@ import ListingsPage from "./pages/ListingsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import TradingPage from "./pages/TradingPage";
 
+import { UserProvider } from "./context/UserProvider";
+
 function App() {
   return (
-    <html>
+    <UserProvider>
       <Routes>
         <Route path="/" element={<SetupPage />} />
         <Route path="/listings" element={<ListingsPage />} />
-        <Route path="*" element={<NotFoundPage />} />
         <Route path="/trading" element={<TradingPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </html>
+    </UserProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import api from 'axios.js'
+import { api } from './axios.js'
 
 // Submit a name (string) and lunchbox (array of strings)
 export const submitLunchbox = async (name, lunchbox) => {
@@ -25,7 +25,19 @@ export const getLunchboxByName = async (name) => {
     ]
 */
 export const getAllLunchBoxes = async () => {
-    api.post("/lunchboxes").then((res)=> {
+    return api.get("/lunchboxes").then((res)=> {
         return res.data
     }).catch(() => null)
 }
+
+
+/* Get all offers in the format:
+    [
+        {
+            id: string,
+            lunchbox: string[]:
+            
+        }
+        ... etc.
+    ]
+*/

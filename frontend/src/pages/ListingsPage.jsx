@@ -3,13 +3,17 @@ import longformBLT from '../assets/longformBLT.png';
 import Logo from '../assets/Logo.png';
 import Button from '../components/Button';
 import NotificationIcon from '../components/NotificationIcon';
-import PageLayout from '../components/PageLayout';
 import Lunchbox from '../components/Lunchbox';
 
 const ListingsPage = () => {
+  
+  // Handler for when a user wants to make an offer
+  const handleMakeOffer = (lunchboxIndex) => {
+    console.log(`Making offer for lunchbox ${lunchboxIndex}`);
+    // TODO: Navigate to offer page or show offer modal
+  };
  
   return (
-    <PageLayout title="Listings">
     <div className="min-h-screen bg-beige pb-16">
       <div className=" h-[124px] bg-beige-darker flex items-center px-4">
         <img src={Logo} alt="Logo" className="h-auto max-h-[80px] object-contain" />
@@ -40,6 +44,7 @@ const ListingsPage = () => {
           size="medium"
           items={['apple', 'cheese', 'carrot', 'juice']}
           boxColor="bg-[#E6D8ED]"
+          onMakeOffer={() => handleMakeOffer(1)}
         />
         
         {/* Blue lunchbox - tilted left */}
@@ -50,6 +55,7 @@ const ListingsPage = () => {
             size="medium"
             items={['egg', 'hummus', 'celery', 'potatoChips']}
             boxColor="bg-teal"
+            onMakeOffer={() => handleMakeOffer(2)}
           />
         </div>
         
@@ -61,12 +67,12 @@ const ListingsPage = () => {
             size="medium"
             items={['cheese', 'apple', 'juice', 'carrot']}
             boxColor="bg-[#F3D4D4]"
+            onMakeOffer={() => handleMakeOffer(3)}
           />
         </div>
       </div>
       
     </div>
-    </PageLayout>
   );
 }
 
