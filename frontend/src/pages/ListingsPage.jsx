@@ -33,15 +33,23 @@ const ListingsPage = () => {
         return tilts[randomIndex];
     };
 
+    // Function to get random layout
+    const getRandomLayout = () => {
+        const layouts = ["default", "flipped", "merged"];
+        const randomIndex = Math.floor(Math.random() * layouts.length);
+        return layouts[randomIndex];
+    };
+
     useEffect(() => {
         const fetchLunchboxes = async () => {
             try {
                 const data = await getAllLunchBoxes();
-                // Add random colors and tilt to each lunchbox
+                // Add random colors, tilt, and layout to each lunchbox
                 const lunchboxesWithColors = data.map((lunchbox) => ({
                     ...lunchbox,
                     colors: getRandomColors(),
                     tilt: getRandomTilt(),
+                    layout: getRandomLayout(),
                 }));
                 setLunchboxes(lunchboxesWithColors);
             } catch (error) {
@@ -112,6 +120,7 @@ const ListingsPage = () => {
                                 size="medium"
                                 items={lunchbox.lunchbox}
                                 boxColor={lunchbox.colors.boxColor}
+                                layout={lunchbox.layout}
                                 onMakeOffer={() =>
                                     handleMakeOffer(lunchbox.name)
                                 }
