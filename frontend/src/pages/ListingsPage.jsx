@@ -227,7 +227,7 @@ const ListingsPage = () => {
                         <div className="flex items-center mb-4 z-10 w-full">
                             <img
                                 src={lunchbox.avatar}
-                                className="w-12 h-12 bg-white rounded-full border-2 border-gray-200"
+                                className="w-12 h-12 bg-white rounded-full border-2 border-black"
                             />
                             <p className="ml-3 font-semibold text-4xl">
                                 {`${lunchbox.name}'s Lunchbox`}
