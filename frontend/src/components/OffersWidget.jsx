@@ -15,7 +15,7 @@ const OffersWidget = ({ offers, isVisible, onClose, onSeeOffer }) => {
                     <h3 className="font-semibold">Trade Offers</h3>
                     <button
                         onClick={onClose}
-                        className="text-white hover:text-gray-200 text-xl font-bold"
+                        className="text-white hover:text-gray-200 text-xl font-bold cursor-pointer"
                     >
                         ×
                     </button>
@@ -42,7 +42,7 @@ const OffersWidget = ({ offers, isVisible, onClose, onSeeOffer }) => {
 
                                 <button
                                     onClick={() => onSeeOffer(offerData.id)}
-                                    className="bg-orange hover:bg-orange-darker text-white px-3 py-1 rounded text-sm font-medium"
+                                    className="bg-orange hover:bg-orange-darker text-white px-3 py-1 rounded text-sm font-medium cursor-pointer"
                                 >
                                     See Offer
                                 </button>
