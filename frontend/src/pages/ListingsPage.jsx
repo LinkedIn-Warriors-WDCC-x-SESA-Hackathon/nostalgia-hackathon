@@ -2,6 +2,7 @@ import longformBLT from "../assets/longformBLT.png";
 import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
 import NotificationIcon from "../components/NotificationIcon";
+import OffersWidget from "../components/OffersWidget";
 
 import Lunchbox from "../components/Lunchbox";
 import { useState, useEffect } from "react";
@@ -17,6 +18,7 @@ const ListingsPage = () => {
     const [offers, setOffers] = useState([]);
     const [hasNewOffer, setHasNewOffer] = useState(false);
     const [previousOfferCount, setPreviousOfferCount] = useState(0);
+    const [showOffersWidget, setShowOffersWidget] = useState(false);
     // Pull data from useUser
     const { lunchbox, setLunchbox, name, setName } = useUser();
 
@@ -132,6 +134,17 @@ const ListingsPage = () => {
         navigate("/");
     };
 
+    // Handler for notification icon click
+    const handleNotificationClick = () => {
+        setShowOffersWidget(!showOffersWidget);
+    };
+
+    // Handler for seeing an offer
+    const handleSeeOffer = (offerId) => {
+        navigate(`/offers/${offerId}`);
+        setShowOffersWidget(false); // Close the widget after navigation
+    };
+
     //
 
     return (
@@ -157,6 +170,15 @@ const ListingsPage = () => {
                 <NotificationIcon
                     count={offers.length}
                     hasNewNotification={hasNewOffer}
+                    onClick={handleNotificationClick}
+                />
+                
+                {/* Offers Widget */}
+                <OffersWidget
+                    offers={offers}
+                    isVisible={showOffersWidget}
+                    onClose={() => setShowOffersWidget(false)}
+                    onSeeOffer={handleSeeOffer}
                 />
             </div>
 
