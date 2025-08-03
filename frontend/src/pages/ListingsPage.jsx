@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import longformBLT from '../assets/longformBLT.png';
 import Logo from '../assets/Logo.png';
@@ -8,9 +8,22 @@ import Lunchbox from '../components/Lunchbox';
 
 const ListingsPage = () => {
   const navigate = useNavigate();
+  const [hasNewNotification, setHasNewNotification] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(3);
 
   const handleEditLunchbox = () => {
     navigate('/');
+  };
+
+  // Demo function to simulate receiving a new notification
+  const simulateNewNotification = () => {
+    setHasNewNotification(true);
+    setNotificationCount(prev => prev + 1);
+    
+    // Reset the hasNewNotification flag after animation
+    setTimeout(() => {
+      setHasNewNotification(false);
+    }, 700);
   };
   
   // Handler for when a user wants to make an offer
@@ -31,7 +44,17 @@ const ListingsPage = () => {
       
       {/* Notification icon on the left side */}
       <div className="absolute top-[124px] left-6 z-50 mt-4">
-        <NotificationIcon count={3} />
+        <NotificationIcon 
+          count={notificationCount} 
+          hasNewNotification={hasNewNotification}
+        />
+      </div>
+      
+      {/* Demo button to test notification animation (remove this in production) */}
+      <div className="absolute top-[180px] left-6 z-50 mt-4">
+        <Button onClick={simulateNewNotification} className="text-xs px-3 py-1">
+          Test Notification
+        </Button>
       </div>
       
       {/* Button on the right side */}
@@ -59,7 +82,7 @@ const ListingsPage = () => {
             primaryColor="bg-teal-darker"
             tilt={-5}
             size="medium"
-            items={['egg', 'hummus', 'celery', 'potatoChips']}
+            items={['egg', 'hummus', 'celery', 'potatochips']}
             boxColor="bg-teal"
             onMakeOffer={() => handleMakeOffer(2)}
           />
