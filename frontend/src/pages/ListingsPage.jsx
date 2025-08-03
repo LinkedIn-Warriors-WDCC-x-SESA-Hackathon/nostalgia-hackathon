@@ -11,11 +11,39 @@ const ListingsPage = () => {
     const [lunchboxes, setLunchboxes] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // Define three color combinations
+    const colorCombinations = [
+        { primaryColor: "bg-purple-darker", boxColor: "bg-[#E6D8ED]" },
+        { primaryColor: "bg-teal-darker", boxColor: "bg-teal" },
+        { primaryColor: "bg-[#DF9D9E]", boxColor: "bg-[#F3D4D4]" },
+    ];
+
+    // Function to get random color combination
+    const getRandomColors = () => {
+        const randomIndex = Math.floor(
+            Math.random() * colorCombinations.length
+        );
+        return colorCombinations[randomIndex];
+    };
+
+    // Function to get random tilt
+    const getRandomTilt = () => {
+        const tilts = [-7, -5, -3, 3, 5, 7]; // left, right
+        const randomIndex = Math.floor(Math.random() * tilts.length);
+        return tilts[randomIndex];
+    };
+
     useEffect(() => {
         const fetchLunchboxes = async () => {
             try {
                 const data = await getAllLunchBoxes();
-                setLunchboxes(data);
+                // Add random colors and tilt to each lunchbox
+                const lunchboxesWithColors = data.map((lunchbox) => ({
+                    ...lunchbox,
+                    colors: getRandomColors(),
+                    tilt: getRandomTilt(),
+                }));
+                setLunchboxes(lunchboxesWithColors);
             } catch (error) {
                 console.error("Error fetching lunchboxes:", error);
                 setLunchboxes([]);
@@ -61,16 +89,16 @@ const ListingsPage = () => {
                 <Button>EDIT LUNCHBOX</Button>
             </div>
 
-            {/* Sample lunchboxes with different colors and tilts - stacked vertically between notification and button */}
+            {/* Lunchboxes with random colors and tilts - stacked vertically between notification and button */}
             <div className="flex flex-col items-center justify-start mt-16 mx-4 px-20">
                 {lunchboxes.map((lunchbox) => (
-                    <div className="mt-24" key={lunchbox.name}>
+                    <div className={"mt-32"} key={lunchbox.name}>
                         <Lunchbox
-                            primaryColor={`bg-purple-darker`}
-                            tilt={0}
+                            primaryColor={lunchbox.colors.primaryColor}
+                            tilt={lunchbox.tilt}
                             size="medium"
                             items={lunchbox.lunchbox}
-                            boxColor={`bg-[#E6D8ED]`}
+                            boxColor={lunchbox.colors.boxColor}
                             onMakeOffer={() => handleMakeOffer(lunchbox.name)}
                         />
                     </div>
