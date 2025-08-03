@@ -8,7 +8,7 @@ import Button from "../components/Button";
 import DisplayNameAlert from "../components/DisplayNameAlert";
 import { submitLunchbox } from "../api/lunchboxApi";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/useUser";}
+import { useUser } from "../context/useUser";
 
 const SetupPage = () => {
     const {setName} = useUser()
