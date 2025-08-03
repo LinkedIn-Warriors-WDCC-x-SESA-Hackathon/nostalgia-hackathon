@@ -5,9 +5,11 @@ import NotificationIcon from "../components/NotificationIcon";
 
 import Lunchbox from "../components/Lunchbox";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAllLunchBoxes } from "../api/lunchboxApi";
 
 const ListingsPage = () => {
+    const navigate = useNavigate();
     const [lunchboxes, setLunchboxes] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -69,6 +71,11 @@ const ListingsPage = () => {
         // TODO: Navigate to offer page or show offer modal
     };
 
+    // Handler for edit lunchbox button
+    const handleEditLunchbox = () => {
+        navigate('/');
+    };
+
     return (
         <div className="min-h-screen bg-beige pb-16">
             <div className=" h-[124px] bg-beige-darker flex items-center px-4">
@@ -94,7 +101,7 @@ const ListingsPage = () => {
 
             {/* Button on the right side */}
             <div className="absolute top-[124px] right-6 z-50 mt-4">
-                <Button>EDIT LUNCHBOX</Button>
+                <Button onClick={handleEditLunchbox}>EDIT LUNCHBOX</Button>
             </div>
 
             {/* Lunchboxes with random colors and tilts - stacked vertically between notification and button */}
