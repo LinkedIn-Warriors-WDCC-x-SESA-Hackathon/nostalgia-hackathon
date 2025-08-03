@@ -7,13 +7,11 @@ import Lunchbox from "../components/Lunchbox";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllLunchBoxes } from "../api/lunchboxApi";
-import { useNavigate } from "react-router-dom";
 
 const ListingsPage = () => {
     const navigate = useNavigate();
     const [lunchboxes, setLunchboxes] = useState([]);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     // Define three color combinations
     const colorCombinations = [
@@ -76,7 +74,7 @@ const ListingsPage = () => {
 
     // Handler for edit lunchbox button
     const handleEditLunchbox = () => {
-        navigate('/');
+        navigate("/");
     };
 
     return (
