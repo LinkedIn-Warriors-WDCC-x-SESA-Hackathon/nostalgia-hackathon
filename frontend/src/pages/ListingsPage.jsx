@@ -80,7 +80,7 @@ const ListingsPage = () => {
             if (name) {
                 // Only poll if we have a user name
                 try {
-                    const newOffers = await findOffers(null, name); // sender=null, receiver=name
+                    const newOffers = await findOffers(undefined, name); // sender=null, receiver=name
                     if (newOffers) {
                         // Check if we have new offers
                         if (
