@@ -172,7 +172,7 @@ const ListingsPage = () => {
                     hasNewNotification={hasNewOffer}
                     onClick={handleNotificationClick}
                 />
-                
+
                 {/* Offers Widget */}
                 <OffersWidget
                     offers={offers}
