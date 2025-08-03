@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SetupPage />} />
         <Route path="/listings" element={<ListingsPage />} />
-        <Route path="/trading" element={<TradingPage />} />
+        <Route path="/trading/:name" element={<TradingPage />} />
         <Route path="/offers/:id" element={<OffersPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

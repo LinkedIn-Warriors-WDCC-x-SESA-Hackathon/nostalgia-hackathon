@@ -29,15 +29,3 @@ export const getAllLunchBoxes = async () => {
         return res.data
     }).catch(() => null)
 }
-
-
-/* Get all offers in the format:
-    [
-        {
-            id: string,
-            lunchbox: string[]:
-            
-        }
-        ... etc.
-    ]
-*/

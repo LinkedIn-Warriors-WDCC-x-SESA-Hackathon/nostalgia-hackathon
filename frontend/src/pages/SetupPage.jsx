@@ -67,6 +67,7 @@ const SetupPage = () => {
 
             // Submit the lunchbox to the API
             await submitLunchbox(displayName, lunchboxItems);
+            
             setName(displayName)
 
 

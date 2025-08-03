@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import longformBLT from "../assets/longformBLT.png";
 import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
+import { useUser } from "../context/useUser";
+import { getLunchboxByName } from "../api/lunchboxApi";
 
 const initialYourItems = [
   "Apple",
@@ -29,10 +32,21 @@ const itemImages = {
 };
 
 const TradingPage = () => {
+  const { name: otherName } = useParams();
+  const { name: thisName } = useUser();
   const [yourItems, setYourItems] = useState(initialYourItems);
   const [leftWhiteBoxItems, setLeftWhiteBoxItems] = useState([]);
   const [otherItems, setOtherItems] = useState(initialOtherItems); // Add this
   const [rightWhiteBoxItems, setRightWhiteBoxItems] = useState([]); // Add this
+
+  useEffect(() => {
+    (async () => {
+      const myLunchbox = await getLunchboxByName(thisName)
+      const otherLunchbox = await getLunchboxByName(otherName)
+      setYourItems(myLunchbox)
+      setOtherItems(otherLunchbox)
+    })()
+  }, [])
 
   // Move one item from purple box to white box (max 4)
   const moveToWhiteBox = (item) => {
