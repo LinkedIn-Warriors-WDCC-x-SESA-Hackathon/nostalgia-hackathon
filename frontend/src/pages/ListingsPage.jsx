@@ -22,6 +22,29 @@ const ListingsPage = () => {
     // Pull data from useUser
     const { lunchbox, setLunchbox, name, setName } = useUser();
 
+    // Avatar images paths
+    const avatarPaths = [
+        "/avatars/icon1.png",
+        "/avatars/icon2.png",
+        "/avatars/icon3.png",
+        "/avatars/icon4.png",
+        "/avatars/icon5.png",
+    ];
+
+    // Function to get deterministic avatar based on name
+    const getAvatarForName = (userName) => {
+        // Simple hash function to convert name to number
+        let hash = 0;
+        for (let i = 0; i < userName.length; i++) {
+            const char = userName.charCodeAt(i);
+            hash = (hash << 5) - hash + char;
+            hash = hash & hash; // Convert to 32-bit integer
+        }
+        // Use absolute value and modulo to get index
+        const index = Math.abs(hash) % avatarPaths.length;
+        return avatarPaths[index];
+    };
+
     // Define three color combinations
     const colorCombinations = [
         { primaryColor: "bg-purple-darker", boxColor: "bg-[#E6D8ED]" },
@@ -56,7 +79,7 @@ const ListingsPage = () => {
         setLoading(true);
         try {
             const data = await getAllLunchBoxes();
-            // Filter out the current user's lunchbox and add random colors, tilt, and layout to each lunchbox
+            // Filter out the current user's lunchbox and add random colors, tilt, layout, and avatar to each lunchbox
             const lunchboxesWithColors = data
                 .filter((lunchbox) => lunchbox.name !== name) // Filter out current user's lunchbox
                 .map((lunchbox) => ({
@@ -64,6 +87,7 @@ const ListingsPage = () => {
                     colors: getRandomColors(),
                     tilt: getRandomTilt(),
                     layout: getRandomLayout(),
+                    avatar: getAvatarForName(lunchbox.name), // Add deterministic avatar
                 }));
             setLunchboxes(lunchboxesWithColors);
         } catch (error) {
@@ -201,7 +225,10 @@ const ListingsPage = () => {
                     >
                         {/* Name and avatar above lunchbox */}
                         <div className="flex items-center mb-4 z-10 w-full">
-                            <div className="w-12 h-12 bg-white rounded-full border-2 border-gray-200"></div>
+                            <img
+                                src={lunchbox.avatar}
+                                className="w-12 h-12 bg-white rounded-full border-2 border-black"
+                            />
                             <p className="ml-3 font-semibold text-4xl">
                                 {`${lunchbox.name}'s Lunchbox`}
                             </p>
