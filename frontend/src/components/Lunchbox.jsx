@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./Button";
+import LunchboxItem from "./LunchboxItem";
 
 const Lunchbox = ({
     primaryColor = "bg-purple-300",
@@ -50,26 +51,10 @@ const Lunchbox = ({
                             className={`flex-1 ${boxColor} rounded-xl flex p-4 shadow-inner`}
                         >
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[0] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[0] + ".svg"
-                                        }
-                                        alt={displayItems[0]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[0]} />
                             </div>
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[1] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[1] + ".svg"
-                                        }
-                                        alt={displayItems[1]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[1]} />
                             </div>
                         </div>
                         {/* Bottom half - items 4 and 5 */}
@@ -77,26 +62,10 @@ const Lunchbox = ({
                             className={`flex-1 ${boxColor} rounded-xl flex p-4 shadow-inner`}
                         >
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[3] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[3] + ".svg"
-                                        }
-                                        alt={displayItems[3]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[3]} />
                             </div>
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[4] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[4] + ".svg"
-                                        }
-                                        alt={displayItems[4]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[4]} />
                             </div>
                         </div>
                     </div>
@@ -106,25 +75,13 @@ const Lunchbox = ({
                         <div
                             className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
                         >
-                            {displayItems[2] && (
-                                <img
-                                    src={"/items/" + displayItems[2] + ".svg"}
-                                    alt={displayItems[2]}
-                                    className="w-28 h-28 object-contain"
-                                />
-                            )}
+                            <LunchboxItem item={displayItems[2]} />
                         </div>
                         {/* Bottom right box - item 6 */}
                         <div
                             className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
                         >
-                            {displayItems[5] && (
-                                <img
-                                    src={"/items/" + displayItems[5] + ".svg"}
-                                    alt={displayItems[5]}
-                                    className="w-28 h-28 object-contain"
-                                />
-                            )}
+                            <LunchboxItem item={displayItems[5]} />
                         </div>
                     </div>
                 </div>
@@ -139,20 +96,8 @@ const Lunchbox = ({
                         <div
                             className={`h-full ${boxColor} rounded-xl flex flex-col justify-evenly items-center p-4 shadow-inner`}
                         >
-                            {displayItems[0] && (
-                                <img
-                                    src={"/items/" + displayItems[0] + ".svg"}
-                                    alt={displayItems[0]}
-                                    className="w-28 h-28 object-contain"
-                                />
-                            )}
-                            {displayItems[3] && (
-                                <img
-                                    src={"/items/" + displayItems[3] + ".svg"}
-                                    alt={displayItems[3]}
-                                    className="w-28 h-28 object-contain"
-                                />
-                            )}
+                            <LunchboxItem item={displayItems[0]} />
+                            <LunchboxItem item={displayItems[3]} />
                         </div>
                     </div>
                     {/* Right side - one large box divided into top and bottom halves */}
@@ -162,26 +107,10 @@ const Lunchbox = ({
                             className={`flex-1 ${boxColor} rounded-xl flex p-4 shadow-inner`}
                         >
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[1] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[1] + ".svg"
-                                        }
-                                        alt={displayItems[1]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[1]} />
                             </div>
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[2] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[2] + ".svg"
-                                        }
-                                        alt={displayItems[2]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[2]} />
                             </div>
                         </div>
                         {/* Bottom half - items 5 and 6 */}
@@ -189,26 +118,10 @@ const Lunchbox = ({
                             className={`flex-1 ${boxColor} rounded-xl flex p-4 shadow-inner`}
                         >
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[4] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[4] + ".svg"
-                                        }
-                                        alt={displayItems[4]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[4]} />
                             </div>
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[5] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[5] + ".svg"
-                                        }
-                                        alt={displayItems[5]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[5]} />
                             </div>
                         </div>
                     </div>
@@ -224,25 +137,13 @@ const Lunchbox = ({
                         <div
                             className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
                         >
-                            {displayItems[0] && (
-                                <img
-                                    src={"/items/" + displayItems[0] + ".svg"}
-                                    alt={displayItems[0]}
-                                    className="w-28 h-28 object-contain"
-                                />
-                            )}
+                            <LunchboxItem item={displayItems[0]} />
                         </div>
                         {/* Bottom left box - item 4 */}
                         <div
                             className={`flex-1 ${boxColor} rounded-xl flex items-center justify-center p-4 shadow-inner`}
                         >
-                            {displayItems[3] && (
-                                <img
-                                    src={"/items/" + displayItems[3] + ".svg"}
-                                    alt={displayItems[3]}
-                                    className="w-28 h-28 object-contain"
-                                />
-                            )}
+                            <LunchboxItem item={displayItems[3]} />
                         </div>
                     </div>
                     {/* Right side - one large box divided into top and bottom halves */}
@@ -252,26 +153,10 @@ const Lunchbox = ({
                             className={`flex-1 ${boxColor} rounded-xl flex p-4 shadow-inner`}
                         >
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[1] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[1] + ".svg"
-                                        }
-                                        alt={displayItems[1]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[1]} />
                             </div>
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[2] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[2] + ".svg"
-                                        }
-                                        alt={displayItems[2]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[2]} />
                             </div>
                         </div>
                         {/* Bottom half - items 5 and 6 */}
@@ -279,26 +164,10 @@ const Lunchbox = ({
                             className={`flex-1 ${boxColor} rounded-xl flex p-4 shadow-inner`}
                         >
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[4] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[4] + ".svg"
-                                        }
-                                        alt={displayItems[4]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[4]} />
                             </div>
                             <div className="flex-1 flex items-center justify-center">
-                                {displayItems[5] && (
-                                    <img
-                                        src={
-                                            "/items/" + displayItems[5] + ".svg"
-                                        }
-                                        alt={displayItems[5]}
-                                        className="w-28 h-28 object-contain"
-                                    />
-                                )}
+                                <LunchboxItem item={displayItems[5]} />
                             </div>
                         </div>
                     </div>
