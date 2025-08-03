@@ -301,8 +301,8 @@ const TradingPage = () => {
         </div>
       </div>
 
-      <div className="flex justify-center mt-10 mr-6">
-        <Button onClick={handleMakeOfferClick}>Make Offer</Button>
+      <div className="flex justify-center mt-4 mr-6">
+        <Button className="cursor-pointer" onClick={handleMakeOfferClick}>Make Offer</Button>
       </div>
     </div>
   );

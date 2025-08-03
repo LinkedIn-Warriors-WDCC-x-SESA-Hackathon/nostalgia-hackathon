@@ -100,9 +100,16 @@ const ListingsPage = () => {
                 <NotificationIcon count={3} />
             </div>
 
+<<<<<<< Updated upstream
             {/* Button on the right side */}
             <div className="absolute top-[124px] right-6 z-50 mt-4">
                 <Button onClick={handleEditLunchbox}>EDIT LUNCHBOX</Button>
+=======
+            {/* Buttons on the right side */}
+            <div className="absolute top-[124px] right-6 z-50 mt-4 flex gap-2">
+                <Button className="cursor-pointer" onClick={fetchLunchboxes}>REFRESH</Button>
+                <Button className="cursor-pointer" onClick={handleEditLunchbox}>EDIT LUNCHBOX</Button>
+>>>>>>> Stashed changes
             </div>
 
             {/* Lunchboxes with random colors and tilts - stacked vertically between notification and button */}
