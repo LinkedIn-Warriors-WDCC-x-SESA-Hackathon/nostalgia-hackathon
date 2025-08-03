@@ -1,7 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import longformBLT from "../assets/longformBLT.png";
 import Logo from "../assets/Logo.png";
-import PageLayout from "../components/PageLayout";
+
 import Button from "../components/Button";
 
 const initialYourItems = [
@@ -30,6 +31,12 @@ const itemImages = {
 };
 
 const TradingPage = () => {
+  const navigate = useNavigate();
+
+  const handleEditLunchbox = () => {
+    navigate('/');
+  };
+
   return (
 
       <div className="min-h-screen bg-beige">
@@ -53,7 +60,11 @@ const TradingPage = () => {
           <div className="flex justify-center mt-17">
             {/* Your Lunchbox */}
             <div className="flex flex-col items-center mr-5 -mt-10">
-              <h2 className="text-4xl font-bold text-center mb-2 -mt-2">
+              <h2 
+                className="text-4xl font-bold text-center mb-2 -mt-2 cursor-pointer hover:text-orange transition-colors"
+                onClick={handleEditLunchbox}
+                title="Click to edit your lunchbox"
+              >
                 Your Lunchbox
               </h2>
               <div className="bg-purple rounded-3xl w-125 h-110 shadow-md flex items-center justify-center relative overflow-hidden">
@@ -82,7 +93,7 @@ const TradingPage = () => {
                 {/* One big lighter purple box on the left with up to 4 items in a 2x2 grid */}
                 <div className="absolute top-4 bottom-4 left-4 flex items-center justify-center z-10">
                   <div className="bg-purple-lighter rounded-3xl w-70 h-102 shadow-md grid grid-cols-2 grid-rows-2 gap-4 items-center justify-center p-4">
-                    {initialYourItems.slice(2, 6).map((item, idx) => (
+                    {initialYourItems.slice(2, 6).map((item) => (
                       <div
                         key={item}
                         className="flex items-center justify-center"
@@ -136,7 +147,7 @@ const TradingPage = () => {
                 {/* One big lighter teal box on the right with up to 4 items in a 2x2 grid */}
                 <div className="absolute top-4 bottom-4 right-4 flex items-center justify-center z-10">
                   <div className="bg-teal-lighter rounded-3xl w-70 h-102 shadow-md grid grid-cols-2 grid-rows-2 gap-4 items-center justify-center p-4">
-                    {initialOtherItems.slice(2, 6).map((item, idx) => (
+                    {initialOtherItems.slice(2, 6).map((item) => (
                       <div
                         key={item}
                         className="flex items-center justify-center"
