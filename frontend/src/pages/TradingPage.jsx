@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import longformBLT from "../assets/longformBLT.png";
 import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
+import Panic from "../assets/panic.png";
 
 const initialYourItems = [
   "Apple",
@@ -29,10 +31,16 @@ const itemImages = {
 };
 
 const TradingPage = () => {
+  const navigate = useNavigate(); // Add this line
   const [yourItems, setYourItems] = useState(initialYourItems);
   const [leftWhiteBoxItems, setLeftWhiteBoxItems] = useState([]);
-  const [otherItems, setOtherItems] = useState(initialOtherItems); // Add this
-  const [rightWhiteBoxItems, setRightWhiteBoxItems] = useState([]); // Add this
+  const [otherItems, setOtherItems] = useState(initialOtherItems);
+  const [rightWhiteBoxItems, setRightWhiteBoxItems] = useState([]);
+
+  // Add panic button handler
+  const handlePanic = () => {
+    navigate("/panic"); // Adjust the route path as needed
+  };
 
   // Move one item from purple box to white box (max 4)
   const moveToWhiteBox = (item) => {
@@ -111,10 +119,10 @@ const TradingPage = () => {
       </div>
 
       <div className="flex justify-center">
-        <div className="flex justify-center mt-17">
+        <div className="flex justify-center mt-30">
           {/* Your Lunchbox */}
-          <div className="flex flex-col items-center mr-5 -mt-10">
-            <h2 className="text-4xl font-bold text-center mb-2 -mt-2">
+          <div className="flex flex-col items-center mr-5 -mt-13">
+            <h2 className="text-4xl font-bold text-center mb-5 -mt-2">
               Your Lunchbox
             </h2>
             <div className="bg-purple rounded-3xl w-125 h-110 shadow-md flex items-center justify-center relative overflow-hidden">
@@ -221,8 +229,8 @@ const TradingPage = () => {
           </div>
 
           {/* Name's Lunchbox */}
-          <div className="flex flex-col items-center mr-5 -mt-10">
-            <h2 className="text-4xl font-bold text-center mb-2 -mt-2 z-30 relative pointer-events-none select-none">
+          <div className="flex flex-col items-center mr-5 -mt-13">
+            <h2 className="text-4xl font-bold text-center mb-5 -mt-2 z-30 relative pointer-events-none select-none">
               Name's Lunchbox
             </h2>
             <div className="bg-teal rounded-3xl w-125 h-110 shadow-md ml-5 flex items-center justify-center relative overflow-hidden">
@@ -283,8 +291,23 @@ const TradingPage = () => {
         </div>
       </div>
 
-      <div className="flex justify-center mt-10 mr-6">
-        <Button>Make Offer</Button>
+      <div className="flex justify-center mt-10 relative">
+        <div className="absolute right-167">
+          <Button>Make Offer</Button>
+        </div>
+      </div>
+
+      {/* Fixed panic button to bottom right of screen */}
+      <div className="fixed bottom-10 right-15 z-50">
+        <img
+          src={Panic}
+          alt="Panic"
+          className="cursor-pointer w-20 h-20 drop-shadow-xl"
+          style={{
+            filter: "drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2))",
+          }}
+          onClick={handlePanic}
+        />
       </div>
     </div>
   );
