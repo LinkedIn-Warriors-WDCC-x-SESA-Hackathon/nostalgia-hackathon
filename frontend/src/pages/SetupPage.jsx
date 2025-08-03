@@ -3,6 +3,7 @@ import BearLunchTrading from "../assets/BearLunchTrading.png";
 import LunchItem from "../components/LunchItem";
 import BLT from "../assets/BLT.png";
 import BuildingLunchbox from "../components/BuildingLunchbox";
+import CameraModal from "../components/CameraModal";
 import { useState } from "react";
 import Button from "../components/Button";
 import DisplayNameAlert from "../components/DisplayNameAlert";
@@ -41,6 +42,7 @@ const SetupPage = () => {
 
     const [selectedItems, setSelectedItems] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [showCameraModal, setShowCameraModal] = useState(false);
 
     const [showDisplayNameAlert, setShowDisplayNameAlert] = useState(false);
     const [displayName, setDisplayName] = useState("");
@@ -99,6 +101,25 @@ const SetupPage = () => {
             setSelectedItems([...selectedItems, item]);
         }
     };
+
+    // Camera handlers
+    const handleOpenCamera = () => {
+        setShowCameraModal(true);
+    };
+
+    const handleCloseCamera = () => {
+        setShowCameraModal(false);
+    };
+
+    const handleCapturePhoto = (photoBlob) => {
+        // Here you could implement AI/ML food recognition
+        // For now, we'll just log that a photo was captured
+        console.log('Photo captured:', photoBlob);
+        
+        // You could send this to an AI service to identify food items
+        // and automatically add them to selectedItems
+        alert('Photo captured! In a real implementation, this would use AI to identify food items.');
+    };
     
     return (<>
 
@@ -132,7 +153,7 @@ const SetupPage = () => {
                 </div>
 
                 <div className="w-full mx-8 flex flex-col h-screen justify-between">
-                    <div className="flex justify-between my-4">
+                    <div className="flex justify-between items-center my-4">
                         <p className="text-2xl mt-12">
                             Set up your lunchbox listing!
                         </p>
@@ -146,9 +167,15 @@ const SetupPage = () => {
                         />
                     </div>
 
-                    <div className="flex justify-end my-8">
+                    <div className="flex justify-between my-8">
+                        <Button 
+                            onClick={handleOpenCamera}
+                            className="bg-teal hover:bg-teal-darker"
+                        >
+                            Scan Lunchbox
+                        </Button>
                         <Button onClick={handleStartTradingClicked}>
-                            Start trading
+                            Start Trading
                         </Button>
                     </div>
                 </div>
@@ -160,6 +187,12 @@ const SetupPage = () => {
                 onClose={handleDisplayNameClose}
                 displayName={displayName}
                 setDisplayName={setDisplayName}
+            />
+
+            <CameraModal
+                isOpen={showCameraModal}
+                onClose={handleCloseCamera}
+                onCapture={handleCapturePhoto}
             />
 
     </>);
