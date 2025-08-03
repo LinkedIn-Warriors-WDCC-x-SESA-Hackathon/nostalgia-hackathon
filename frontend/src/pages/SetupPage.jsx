@@ -12,8 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/useUser";
 
 const SetupPage = () => {
-    const {setName} = useUser()
-    
+    const { setName } = useUser();
+
     const foodItems = [
         { id: "apple", name: "Apple" },
         { id: "bagel", name: "Bagel" },
@@ -69,9 +69,8 @@ const SetupPage = () => {
 
             // Submit the lunchbox to the API
             await submitLunchbox(displayName, lunchboxItems);
-            
-            setName(displayName)
 
+            setName(displayName);
 
             // Close the modal and navigate to listings page
             setShowDisplayNameAlert(false);
@@ -115,15 +114,17 @@ const SetupPage = () => {
     const handleCapturePhoto = (photoBlob) => {
         // Here you could implement AI/ML food recognition
         // For now, we'll just log that a photo was captured
-        console.log('Photo captured:', photoBlob);
-        
+        console.log("Photo captured:", photoBlob);
+
         // You could send this to an AI service to identify food items
         // and automatically add them to selectedItems
-        alert('Photo captured! In a real implementation, this would use AI to identify food items.');
+        alert(
+            "Photo captured! In a real implementation, this would use AI to identify food items."
+        );
     };
-    
-    return (<>
 
+    return (
+        <>
             <div className="flex h-screen bg-beige">
                 <div className="w-120 bg-beige-darkest flex flex-col">
                     <div className="bg-beige-darker p-4">
@@ -169,13 +170,16 @@ const SetupPage = () => {
                     </div>
 
                     <div className="flex justify-between my-8">
-                        <Button 
+                        <Button
                             onClick={handleOpenCamera}
-                            className="bg-teal hover:bg-teal-darker"
+                            className="bg-teal hover:bg-teal-darker cursor-pointer"
                         >
                             Scan Lunchbox
                         </Button>
-                        <Button onClick={handleStartTradingClicked}>
+                        <Button
+                            className="cursor-pointer"
+                            onClick={handleStartTradingClicked}
+                        >
                             Start Trading
                         </Button>
                     </div>
@@ -195,8 +199,8 @@ const SetupPage = () => {
                 onClose={handleCloseCamera}
                 onCapture={handleCapturePhoto}
             />
-
-    </>);
+        </>
+    );
 };
 
 export default SetupPage;
