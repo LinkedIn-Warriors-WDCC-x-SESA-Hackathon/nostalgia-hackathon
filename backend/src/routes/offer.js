@@ -73,7 +73,7 @@ router.post('/:id/decline', (req, res) => {
     if (!offer) {
         res.status(404).end()
     } else {
-        offers.delete(id)
+        offers.delete(req.params.id)
         res.status(200).end()
     }
 })
