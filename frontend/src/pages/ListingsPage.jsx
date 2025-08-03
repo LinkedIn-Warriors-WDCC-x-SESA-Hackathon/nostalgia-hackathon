@@ -51,26 +51,30 @@ const ListingsPage = () => {
         return layouts[randomIndex];
     };
 
-    useEffect(() => {
-        const fetchLunchboxes = async () => {
-            try {
-                const data = await getAllLunchBoxes();
-                // Add random colors, tilt, and layout to each lunchbox
-                const lunchboxesWithColors = data.map((lunchbox) => ({
+    // Consolidated function to fetch lunchboxes
+    const fetchLunchboxes = async () => {
+        setLoading(true);
+        try {
+            const data = await getAllLunchBoxes();
+            // Filter out the current user's lunchbox and add random colors, tilt, and layout to each lunchbox
+            const lunchboxesWithColors = data
+                .filter((lunchbox) => lunchbox.name !== name) // Filter out current user's lunchbox
+                .map((lunchbox) => ({
                     ...lunchbox,
                     colors: getRandomColors(),
                     tilt: getRandomTilt(),
                     layout: getRandomLayout(),
                 }));
-                setLunchboxes(lunchboxesWithColors);
-            } catch (error) {
-                console.error("Error fetching lunchboxes:", error);
-                setLunchboxes([]);
-            } finally {
-                setLoading(false);
-            }
-        };
+            setLunchboxes(lunchboxesWithColors);
+        } catch (error) {
+            console.error("Error fetching lunchboxes:", error);
+            setLunchboxes([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchLunchboxes();
     }, []);
 
@@ -182,8 +186,9 @@ const ListingsPage = () => {
                 />
             </div>
 
-            {/* Button on the right side */}
-            <div className="absolute top-[124px] right-6 z-50 mt-4">
+            {/* Buttons on the right side */}
+            <div className="absolute top-[124px] right-6 z-50 mt-4 flex gap-2">
+                <Button onClick={fetchLunchboxes}>REFRESH</Button>
                 <Button onClick={handleEditLunchbox}>EDIT LUNCHBOX</Button>
             </div>
 
