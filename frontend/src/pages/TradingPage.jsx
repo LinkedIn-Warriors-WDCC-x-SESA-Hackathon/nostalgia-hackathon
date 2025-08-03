@@ -134,10 +134,10 @@ const TradingPage = () => {
       </div>
 
       <div className="flex justify-center">
-        <div className="flex justify-center mt-17">
+        <div className="flex justify-center mt-33">
           {/* Your Lunchbox */}
-          <div className="flex flex-col items-center mr-5 -mt-10">
-            <h2 className="text-4xl font-bold text-center mb-2 -mt-2">
+          <div className="flex flex-col items-center mr-5 -mt-13">
+            <h2 className="text-4xl font-bold text-center mb-5 -mt-2">
               Your Lunchbox
             </h2>
             <div className="bg-purple rounded-3xl w-125 h-110 shadow-md flex items-center justify-center relative overflow-hidden">
@@ -244,8 +244,8 @@ const TradingPage = () => {
           </div>
 
           {/* Name's Lunchbox */}
-          <div className="flex flex-col items-center mr-5 -mt-10">
-            <h2 className="text-4xl font-bold text-center mb-2 -mt-2 z-30 relative pointer-events-none select-none">
+          <div className="flex flex-col items-center mr-5 -mt-13">
+            <h2 className="text-4xl font-bold text-center mb-5 -mt-2 z-30 relative pointer-events-none select-none">
               {`${otherName}'s Lunchbox`}
             </h2>
             <div className="bg-teal rounded-3xl w-125 h-110 shadow-md ml-5 flex items-center justify-center relative overflow-hidden">
