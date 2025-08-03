@@ -5,6 +5,9 @@ import longformBLT from "../assets/longformBLT.png";
 import "../index.css";
 import Button from "../components/Button";
 import { findOfferWithId, acceptOffer, declineOffer } from "../api/offerApi";
+import LunchItem from "../components/LunchItem";
+
+import { itemNameMap } from "../util/items";
 
 const OffersPage = () => {
   const navigate = useNavigate(); // React Router's navigation hook
@@ -19,7 +22,7 @@ const OffersPage = () => {
       setLoading(false)
     })()
     
-  }, [])
+  }, [id])
 
   const accept = async () => {
     await acceptOffer(id);
@@ -45,13 +48,36 @@ const OffersPage = () => {
         <div className="flex flex-row gap-7">
           <div className="flex flex-col items-center">
             <p className="text-black text-xl font-bold mb-2">Offer</p>
-            <div className="bg-white w-[300px] h-[350px] rounded-3xl"></div>
+            <div className="bg-white w-[300px] h-[350px] rounded-3xl text-black p-4">
+              <div className="grid grid-cols-2 gap-4">
+                {(offer?.offering ?? []).map(item => {
+                  return <div className="flex items-center justify-center text-center" key={item}>
+                      <div>
+                        <img src={`/public/items/${item}.svg`} className="inline-block h-16 mt-4"></img>
+                        <p>{itemNameMap.get(item)}</p>
+                      </div>
+                  </div>
+                })}
+              </div>
+              
+            </div>
               
           </div>
 
           <div className="flex flex-col items-center">
             <p className="text-black text-xl font-bold mb-2">Request</p>
-            <div className="bg-white w-[300px] h-[350px] rounded-3xl"></div>
+            <div className="bg-white w-[300px] h-[350px] rounded-3xl p-4">
+              <div className="grid grid-cols-2 gap-4">
+                {(offer?.wanting ?? []).map(item => {
+                  return <div className="flex items-center justify-center text-center" key={item}>
+                      <div>
+                        <img src={`/public/items/${item}.svg`} className="inline-block h-16 mt-4"></img>
+                        <p>{itemNameMap.get(item)}</p>
+                      </div>
+                  </div>
+                })}
+              </div>
+            </div>
           </div>
         </div>
 
