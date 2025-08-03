@@ -2,16 +2,25 @@ import longformBLT from "../assets/longformBLT.png";
 import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
 import NotificationIcon from "../components/NotificationIcon";
+import OffersWidget from "../components/OffersWidget";
 
 import Lunchbox from "../components/Lunchbox";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllLunchBoxes } from "../api/lunchboxApi";
+import { findOffers } from "../api/offerApi";
+import { useUser } from "../context/useUser";
 
 const ListingsPage = () => {
     const navigate = useNavigate();
     const [lunchboxes, setLunchboxes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [offers, setOffers] = useState([]);
+    const [hasNewOffer, setHasNewOffer] = useState(false);
+    const [previousOfferCount, setPreviousOfferCount] = useState(0);
+    const [showOffersWidget, setShowOffersWidget] = useState(false);
+    // Pull data from useUser
+    const { lunchbox, setLunchbox, name, setName } = useUser();
 
     // Define three color combinations
     const colorCombinations = [
@@ -65,6 +74,54 @@ const ListingsPage = () => {
         fetchLunchboxes();
     }, []);
 
+    // Poll for new offers every 5 seconds
+    useEffect(() => {
+        let intervalId;
+
+        const pollOffers = async () => {
+            if (name) {
+                // Only poll if we have a user name
+                try {
+                    const newOffers = await findOffers(undefined, name); // sender=null, receiver=name
+                    if (newOffers) {
+                        // Check if we have new offers
+                        if (
+                            newOffers.length > previousOfferCount &&
+                            previousOfferCount > 0
+                        ) {
+                            setHasNewOffer(true);
+                            // Reset the highlight after 3 seconds
+                            setTimeout(() => setHasNewOffer(false), 3000);
+                        }
+
+                        setOffers(newOffers);
+                        setPreviousOfferCount(newOffers.length);
+                        console.log(
+                            `Found ${newOffers.length} offers for ${name}`
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error polling offers:", error);
+                }
+            }
+        };
+
+        // Initial poll
+        pollOffers();
+
+        // Set up interval to poll every 5 seconds
+        if (name) {
+            intervalId = setInterval(pollOffers, 5000);
+        }
+
+        // Cleanup interval on unmount or when name changes
+        return () => {
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+        };
+    }, [name]); // Re-run when name changes
+
     // Handler for when a user wants to make an offer
     const handleMakeOffer = (lunchboxName) => {
         console.log(`Making offer for ${lunchboxName}'s lunchbox`);
@@ -76,6 +133,19 @@ const ListingsPage = () => {
     const handleEditLunchbox = () => {
         navigate("/");
     };
+
+    // Handler for notification icon click
+    const handleNotificationClick = () => {
+        setShowOffersWidget(!showOffersWidget);
+    };
+
+    // Handler for seeing an offer
+    const handleSeeOffer = (offerId) => {
+        navigate(`/offers/${offerId}`);
+        setShowOffersWidget(false); // Close the widget after navigation
+    };
+
+    //
 
     return (
         <div className="min-h-screen bg-beige pb-16">
@@ -97,7 +167,19 @@ const ListingsPage = () => {
 
             {/* Notification icon on the left side */}
             <div className="absolute top-[124px] left-6 z-50 mt-4">
-                <NotificationIcon count={3} />
+                <NotificationIcon
+                    count={offers.length}
+                    hasNewNotification={hasNewOffer}
+                    onClick={handleNotificationClick}
+                />
+
+                {/* Offers Widget */}
+                <OffersWidget
+                    offers={offers}
+                    isVisible={showOffersWidget}
+                    onClose={() => setShowOffersWidget(false)}
+                    onSeeOffer={handleSeeOffer}
+                />
             </div>
 
             {/* Button on the right side */}
