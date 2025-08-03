@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import longformBLT from '../assets/longformBLT.png';
 import Logo from '../assets/Logo.png';
 import Button from '../components/Button';
@@ -6,6 +7,11 @@ import NotificationIcon from '../components/NotificationIcon';
 import Lunchbox from '../components/Lunchbox';
 
 const ListingsPage = () => {
+  const navigate = useNavigate();
+
+  const handleEditLunchbox = () => {
+    navigate('/');
+  };
   
   // Handler for when a user wants to make an offer
   const handleMakeOffer = (lunchboxIndex) => {
@@ -30,7 +36,7 @@ const ListingsPage = () => {
       
       {/* Button on the right side */}
       <div className="absolute top-[124px] right-6 z-50 mt-4">
-        <Button>
+        <Button onClick={handleEditLunchbox}>
           EDIT LUNCHBOX
         </Button>
       </div>
