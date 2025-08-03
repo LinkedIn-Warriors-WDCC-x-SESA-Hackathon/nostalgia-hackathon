@@ -22,7 +22,7 @@ const OffersPage = () => {
       setLoading(false)
     })()
     
-  }, [])
+  }, [id])
 
   const accept = async () => {
     await acceptOffer(id);
