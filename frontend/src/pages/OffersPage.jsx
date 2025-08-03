@@ -6,6 +6,7 @@ import "../index.css";
 import Button from "../components/Button";
 import { findOfferWithId, acceptOffer, declineOffer } from "../api/offerApi";
 import LunchItem from "../components/LunchItem";
+import Panic from "../assets/Panic.png";
 
 import { itemNameMap } from "../util/items";
 
@@ -31,6 +32,10 @@ const OffersPage = () => {
     const decline = async () => {
         await declineOffer(id);
         navigate("/listings");
+    };
+
+    const handlePanic = () => {
+        navigate("/panic");
     };
 
     const loadedView = (
@@ -153,6 +158,18 @@ const OffersPage = () => {
                     >
                         Back
                     </Button>
+                </div>
+
+                <div className="fixed bottom-10 right-15 z-50">
+                    <img
+                        src={Panic}
+                        alt="Panic"
+                        className="cursor-pointer w-20 h-20 drop-shadow-xl"
+                        style={{
+                            filter: "drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2))",
+                        }}
+                        onClick={handlePanic}
+                    />
                 </div>
 
                 {loading ? null : loadedView}
