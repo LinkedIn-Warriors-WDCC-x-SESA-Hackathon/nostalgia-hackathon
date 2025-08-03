@@ -7,9 +7,8 @@ export const submitLunchbox = async (name, lunchbox) => {
 
 // Get a specific lunchbox (array of strings) by name
 export const getLunchboxByName = async (name) => {
-    api.post(`/lunchboxes/${name}`).then((res)=> {
-        return res.data
-    }).catch(() => null)
+    const res = await api.get(`/lunchboxes/${name}`)
+    return res.data
 }
 
 /* Get all lunchboxes in the format:

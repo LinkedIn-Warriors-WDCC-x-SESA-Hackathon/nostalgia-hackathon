@@ -34,3 +34,7 @@ export const acceptOffer = async (id) => {
 export const declineOffer = async (id) => {
     await api.post(`/offers/${id}/decline`)
 }
+
+export const makeOffer = async (offer) => {
+    await api.post(`/offers`, offer)
+}
