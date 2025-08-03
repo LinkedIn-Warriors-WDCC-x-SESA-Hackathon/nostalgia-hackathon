@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import longformBLT from "../assets/longformBLT.png";
 import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
+import { useUser } from "../context/useUser";
+import { getLunchboxByName } from "../api/lunchboxApi";
+import {makeOffer} from "../api/offerApi"
 
 const initialYourItems = [
   "Apple",
@@ -19,20 +23,34 @@ const initialOtherItems = [
   "Yogurt",
   "Banana",
 ];
-const itemImages = {
-  Apple: "/items/apple.svg",
-  Biscuits: "/items/biscuits.svg",
-  Juice: "/items/juice.svg",
-  Sandwich: "/items/sandwich.svg",
-  Yogurt: "/items/yogurt.svg",
-  Banana: "/items/banana.svg",
-};
 
 const TradingPage = () => {
-  const [yourItems, setYourItems] = useState(initialYourItems);
+  const { name: otherName } = useParams();
+  const { name: thisName } = useUser();
+  const [yourItems, setYourItems] = useState([]);
   const [leftWhiteBoxItems, setLeftWhiteBoxItems] = useState([]);
-  const [otherItems, setOtherItems] = useState(initialOtherItems); // Add this
+  const [otherItems, setOtherItems] = useState([]); // Add this
   const [rightWhiteBoxItems, setRightWhiteBoxItems] = useState([]); // Add this
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    (async () => {
+      const myLunchbox = await getLunchboxByName(thisName)
+      const otherLunchbox = await getLunchboxByName(otherName)
+      setYourItems(myLunchbox)
+      setOtherItems(otherLunchbox)
+    })()
+  }, [])
+
+  const handleMakeOfferClick = async () => {
+    await makeOffer({
+      sender: thisName,
+      receiver: otherName,
+      offering: leftWhiteBoxItems,
+      wanting: rightWhiteBoxItems
+    })
+    navigate('/listings')
+  }
 
   // Move one item from purple box to white box (max 4)
   const moveToWhiteBox = (item) => {
@@ -122,13 +140,13 @@ const TradingPage = () => {
               <div className="absolute top-4 right-4 flex flex-col gap-4 z-10">
                 {yourItems.slice(0, 2).map((item) => (
                   <div
-                    key={item}
+                    key={Math.random()}
                     className="bg-purple-lighter rounded-3xl w-43 h-49 shadow-md flex items-center justify-center cursor-pointer"
                     onClick={() => moveToWhiteBox(item)}
                     title="Click to move to white box"
                   >
                     <img
-                      src={itemImages[item]}
+                      src={`/public/items/${item}.svg`}
                       alt={item}
                       className="max-h-32 max-w-32 object-contain"
                     />
@@ -141,7 +159,7 @@ const TradingPage = () => {
                   const item = yourItems[idx];
                   return (
                     <div
-                      key={idx}
+                      key={Math.random()}
                       className="bg-purple-lighter rounded-3xl w-43 h-49 shadow-md flex items-center justify-center"
                       style={{ cursor: item ? "pointer" : "default" }}
                       onClick={item ? () => moveToWhiteBox(item) : undefined}
@@ -149,7 +167,7 @@ const TradingPage = () => {
                     >
                       {item && (
                         <img
-                          src={itemImages[item]}
+                          src={`/public/items/${item}.svg`}
                           alt={item}
                           className="max-h-32 max-w-32 object-contain"
                         />
@@ -165,7 +183,7 @@ const TradingPage = () => {
                     const item = yourItems[idx + 2];
                     return (
                       <div
-                        key={idx}
+                        key={Math.random()}
                         className="flex items-center justify-center"
                         style={{ cursor: item ? "pointer" : "default" }}
                         onClick={item ? () => moveToWhiteBox(item) : undefined}
@@ -173,7 +191,7 @@ const TradingPage = () => {
                       >
                         {item && (
                           <img
-                            src={itemImages[item]}
+                            src={`/public/items/${item}.svg`}
                             alt={item}
                             className="max-h-20 max-w-20 object-contain"
                           />
@@ -194,8 +212,8 @@ const TradingPage = () => {
               <div className="grid grid-rows-4 gap-4 h-full w-full place-items-center">
                 {leftWhiteBoxItems.slice(0, 4).map((item) => (
                   <img
-                    key={item}
-                    src={itemImages[item]}
+                    key={Math.random()}
+                    src={`/public/items/${item}.svg`}
                     alt={item}
                     className="max-h-12 max-w-12 object-contain cursor-pointer"
                     onClick={() => moveBackToPurpleBox(item)}
@@ -208,8 +226,8 @@ const TradingPage = () => {
               <div className="grid grid-rows-4 gap-4 h-full w-full place-items-center">
                 {rightWhiteBoxItems.slice(0, 4).map((item) => (
                   <img
-                    key={item}
-                    src={itemImages[item]}
+                    key={Math.random()}
+                    src={`/public/items/${item}.svg`}
                     alt={item}
                     className="max-h-12 max-w-12 object-contain cursor-pointer"
                     onClick={() => moveBackToTealBox(item)}
@@ -232,7 +250,7 @@ const TradingPage = () => {
                   const item = otherItems[idx];
                   return (
                     <div
-                      key={idx}
+                      key={Math.random()}
                       className="bg-teal-lighter rounded-3xl w-43 h-49 shadow-md flex items-center justify-center"
                       style={{ cursor: item ? "pointer" : "default" }}
                       onClick={
@@ -242,7 +260,7 @@ const TradingPage = () => {
                     >
                       {item && (
                         <img
-                          src={itemImages[item]}
+                          src={`/public/items/${item}.svg`}
                           alt={item}
                           className="max-h-32 max-w-32 object-contain"
                         />
@@ -258,7 +276,7 @@ const TradingPage = () => {
                     const item = otherItems[idx + 2];
                     return (
                       <div
-                        key={idx}
+                        key={Math.random()}
                         className="flex items-center justify-center"
                         style={{ cursor: item ? "pointer" : "default" }}
                         onClick={
@@ -268,7 +286,7 @@ const TradingPage = () => {
                       >
                         {item && (
                           <img
-                            src={itemImages[item]}
+                            src={`/public/items/${item}.svg`}
                             alt={item}
                             className="max-h-20 max-w-20 object-contain"
                           />
@@ -284,7 +302,7 @@ const TradingPage = () => {
       </div>
 
       <div className="flex justify-center mt-10 mr-6">
-        <Button>Make Offer</Button>
+        <Button onClick={handleMakeOfferClick}>Make Offer</Button>
       </div>
     </div>
   );
