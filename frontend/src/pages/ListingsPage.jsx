@@ -7,11 +7,13 @@ import Lunchbox from "../components/Lunchbox";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllLunchBoxes } from "../api/lunchboxApi";
+import { useNavigate } from "react-router-dom";
 
 const ListingsPage = () => {
     const navigate = useNavigate();
     const [lunchboxes, setLunchboxes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     // Define three color combinations
     const colorCombinations = [
@@ -69,6 +71,7 @@ const ListingsPage = () => {
     const handleMakeOffer = (lunchboxName) => {
         console.log(`Making offer for ${lunchboxName}'s lunchbox`);
         // TODO: Navigate to offer page or show offer modal
+        navigate(`/trading/${lunchboxName}`);
     };
 
     // Handler for edit lunchbox button
