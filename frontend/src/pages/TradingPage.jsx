@@ -5,7 +5,8 @@ import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
 import { useUser } from "../context/useUser";
 import { getLunchboxByName } from "../api/lunchboxApi";
-import {makeOffer} from "../api/offerApi"
+import { makeOffer } from "../api/offerApi";
+import Panic from "../assets/Panic.png";
 
 const initialYourItems = [
   "Apple",
@@ -31,26 +32,26 @@ const TradingPage = () => {
   const [leftWhiteBoxItems, setLeftWhiteBoxItems] = useState([]);
   const [otherItems, setOtherItems] = useState([]); // Add this
   const [rightWhiteBoxItems, setRightWhiteBoxItems] = useState([]); // Add this
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
-      const myLunchbox = await getLunchboxByName(thisName)
-      const otherLunchbox = await getLunchboxByName(otherName)
-      setYourItems(myLunchbox)
-      setOtherItems(otherLunchbox)
-    })()
-  }, [])
+      const myLunchbox = await getLunchboxByName(thisName);
+      const otherLunchbox = await getLunchboxByName(otherName);
+      setYourItems(myLunchbox);
+      setOtherItems(otherLunchbox);
+    })();
+  }, []);
 
   const handleMakeOfferClick = async () => {
     await makeOffer({
       sender: thisName,
       receiver: otherName,
       offering: leftWhiteBoxItems,
-      wanting: rightWhiteBoxItems
-    })
-    navigate('/listings')
-  }
+      wanting: rightWhiteBoxItems,
+    });
+    navigate("/listings");
+  };
 
   // Move one item from purple box to white box (max 4)
   const moveToWhiteBox = (item) => {
@@ -108,6 +109,10 @@ const TradingPage = () => {
     }
 
     setOtherItems(newOtherItems);
+  };
+
+  const handlePanic = () => {
+    navigate("/panic");
   };
 
   return (
@@ -303,6 +308,17 @@ const TradingPage = () => {
 
       <div className="flex justify-center mt-10 mr-6">
         <Button onClick={handleMakeOfferClick}>Make Offer</Button>
+      </div>
+      <div className="fixed bottom-10 right-15 z-50">
+        <img
+          src={Panic}
+          alt="Panic"
+          className="cursor-pointer w-20 h-20 drop-shadow-xl"
+          style={{
+            filter: "drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2))",
+          }}
+          onClick={handlePanic}
+        />
       </div>
     </div>
   );

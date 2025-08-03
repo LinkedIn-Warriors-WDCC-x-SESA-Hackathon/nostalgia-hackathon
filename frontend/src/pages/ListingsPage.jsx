@@ -3,7 +3,7 @@ import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
 import NotificationIcon from "../components/NotificationIcon";
 import OffersWidget from "../components/OffersWidget";
-
+import Panic from "../assets/Panic.png";
 import Lunchbox from "../components/Lunchbox";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,247 +12,251 @@ import { findOffers } from "../api/offerApi";
 import { useUser } from "../context/useUser";
 
 const ListingsPage = () => {
-    const navigate = useNavigate();
-    const [lunchboxes, setLunchboxes] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [offers, setOffers] = useState([]);
-    const [hasNewOffer, setHasNewOffer] = useState(false);
-    const [previousOfferCount, setPreviousOfferCount] = useState(0);
-    const [showOffersWidget, setShowOffersWidget] = useState(false);
-    // Pull data from useUser
-    const { lunchbox, setLunchbox, name, setName } = useUser();
+  const navigate = useNavigate();
+  const [lunchboxes, setLunchboxes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [offers, setOffers] = useState([]);
+  const [hasNewOffer, setHasNewOffer] = useState(false);
+  const [previousOfferCount, setPreviousOfferCount] = useState(0);
+  const [showOffersWidget, setShowOffersWidget] = useState(false);
+  // Pull data from useUser
+  const { lunchbox, setLunchbox, name, setName } = useUser();
 
-    // Avatar images paths
-    const avatarPaths = [
-        "/avatars/icon1.png",
-        "/avatars/icon2.png",
-        "/avatars/icon3.png",
-        "/avatars/icon4.png",
-        "/avatars/icon5.png",
-    ];
+  // Avatar images paths
+  const avatarPaths = [
+    "/avatars/icon1.png",
+    "/avatars/icon2.png",
+    "/avatars/icon3.png",
+    "/avatars/icon4.png",
+    "/avatars/icon5.png",
+  ];
 
-    // Function to get deterministic avatar based on name
-    const getAvatarForName = (userName) => {
-        // Simple hash function to convert name to number
-        let hash = 0;
-        for (let i = 0; i < userName.length; i++) {
-            const char = userName.charCodeAt(i);
-            hash = (hash << 5) - hash + char;
-            hash = hash & hash; // Convert to 32-bit integer
-        }
-        // Use absolute value and modulo to get index
-        const index = Math.abs(hash) % avatarPaths.length;
-        return avatarPaths[index];
-    };
+  // Function to get deterministic avatar based on name
+  const getAvatarForName = (userName) => {
+    // Simple hash function to convert name to number
+    let hash = 0;
+    for (let i = 0; i < userName.length; i++) {
+      const char = userName.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    // Use absolute value and modulo to get index
+    const index = Math.abs(hash) % avatarPaths.length;
+    return avatarPaths[index];
+  };
 
-    // Define three color combinations
-    const colorCombinations = [
-        { primaryColor: "bg-purple-darker", boxColor: "bg-[#E6D8ED]" },
-        { primaryColor: "bg-teal-darker", boxColor: "bg-teal" },
-        { primaryColor: "bg-[#DF9D9E]", boxColor: "bg-[#F3D4D4]" },
-    ];
+  // Define three color combinations
+  const colorCombinations = [
+    { primaryColor: "bg-purple-darker", boxColor: "bg-[#E6D8ED]" },
+    { primaryColor: "bg-teal-darker", boxColor: "bg-teal" },
+    { primaryColor: "bg-[#DF9D9E]", boxColor: "bg-[#F3D4D4]" },
+  ];
 
-    // Function to get random color combination
-    const getRandomColors = () => {
-        const randomIndex = Math.floor(
-            Math.random() * colorCombinations.length
-        );
-        return colorCombinations[randomIndex];
-    };
+  // Function to get random color combination
+  const getRandomColors = () => {
+    const randomIndex = Math.floor(Math.random() * colorCombinations.length);
+    return colorCombinations[randomIndex];
+  };
 
-    // Function to get random tilt
-    const getRandomTilt = () => {
-        const tilts = [-3, -2, -1, 1, 2, 3]; // left, right
-        const randomIndex = Math.floor(Math.random() * tilts.length);
-        return tilts[randomIndex];
-    };
+  // Function to get random tilt
+  const getRandomTilt = () => {
+    const tilts = [-3, -2, -1, 1, 2, 3]; // left, right
+    const randomIndex = Math.floor(Math.random() * tilts.length);
+    return tilts[randomIndex];
+  };
 
-    // Function to get random layout
-    const getRandomLayout = () => {
-        const layouts = ["default", "flipped", "merged"];
-        const randomIndex = Math.floor(Math.random() * layouts.length);
-        return layouts[randomIndex];
-    };
+  // Function to get random layout
+  const getRandomLayout = () => {
+    const layouts = ["default", "flipped", "merged"];
+    const randomIndex = Math.floor(Math.random() * layouts.length);
+    return layouts[randomIndex];
+  };
 
-    // Consolidated function to fetch lunchboxes
-    const fetchLunchboxes = async () => {
-        setLoading(true);
+  // Consolidated function to fetch lunchboxes
+  const fetchLunchboxes = async () => {
+    setLoading(true);
+    try {
+      const data = await getAllLunchBoxes();
+      // Filter out the current user's lunchbox and add random colors, tilt, layout, and avatar to each lunchbox
+      const lunchboxesWithColors = data
+        .filter((lunchbox) => lunchbox.name !== name) // Filter out current user's lunchbox
+        .map((lunchbox) => ({
+          ...lunchbox,
+          colors: getRandomColors(),
+          tilt: getRandomTilt(),
+          layout: getRandomLayout(),
+          avatar: getAvatarForName(lunchbox.name), // Add deterministic avatar
+        }));
+      setLunchboxes(lunchboxesWithColors);
+    } catch (error) {
+      console.error("Error fetching lunchboxes:", error);
+      setLunchboxes([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchLunchboxes();
+  }, []);
+
+  // Poll for new offers every 5 seconds
+  useEffect(() => {
+    let intervalId;
+
+    const pollOffers = async () => {
+      if (name) {
+        // Only poll if we have a user name
         try {
-            const data = await getAllLunchBoxes();
-            // Filter out the current user's lunchbox and add random colors, tilt, layout, and avatar to each lunchbox
-            const lunchboxesWithColors = data
-                .filter((lunchbox) => lunchbox.name !== name) // Filter out current user's lunchbox
-                .map((lunchbox) => ({
-                    ...lunchbox,
-                    colors: getRandomColors(),
-                    tilt: getRandomTilt(),
-                    layout: getRandomLayout(),
-                    avatar: getAvatarForName(lunchbox.name), // Add deterministic avatar
-                }));
-            setLunchboxes(lunchboxesWithColors);
+          const newOffers = await findOffers(undefined, name); // sender=null, receiver=name
+          if (newOffers) {
+            // Check if we have new offers
+            if (
+              newOffers.length > previousOfferCount &&
+              previousOfferCount > 0
+            ) {
+              setHasNewOffer(true);
+              // Reset the highlight after 3 seconds
+              setTimeout(() => setHasNewOffer(false), 3000);
+            }
+
+            setOffers(newOffers);
+            setPreviousOfferCount(newOffers.length);
+            console.log(`Found ${newOffers.length} offers for ${name}`);
+          }
         } catch (error) {
-            console.error("Error fetching lunchboxes:", error);
-            setLunchboxes([]);
-        } finally {
-            setLoading(false);
+          console.error("Error polling offers:", error);
         }
+      }
     };
 
-    useEffect(() => {
-        fetchLunchboxes();
-    }, []);
+    // Initial poll
+    pollOffers();
 
-    // Poll for new offers every 5 seconds
-    useEffect(() => {
-        let intervalId;
+    // Set up interval to poll every 5 seconds
+    if (name) {
+      intervalId = setInterval(pollOffers, 5000);
+    }
 
-        const pollOffers = async () => {
-            if (name) {
-                // Only poll if we have a user name
-                try {
-                    const newOffers = await findOffers(undefined, name); // sender=null, receiver=name
-                    if (newOffers) {
-                        // Check if we have new offers
-                        if (
-                            newOffers.length > previousOfferCount &&
-                            previousOfferCount > 0
-                        ) {
-                            setHasNewOffer(true);
-                            // Reset the highlight after 3 seconds
-                            setTimeout(() => setHasNewOffer(false), 3000);
-                        }
-
-                        setOffers(newOffers);
-                        setPreviousOfferCount(newOffers.length);
-                        console.log(
-                            `Found ${newOffers.length} offers for ${name}`
-                        );
-                    }
-                } catch (error) {
-                    console.error("Error polling offers:", error);
-                }
-            }
-        };
-
-        // Initial poll
-        pollOffers();
-
-        // Set up interval to poll every 5 seconds
-        if (name) {
-            intervalId = setInterval(pollOffers, 5000);
-        }
-
-        // Cleanup interval on unmount or when name changes
-        return () => {
-            if (intervalId) {
-                clearInterval(intervalId);
-            }
-        };
-    }, [name]); // Re-run when name changes
-
-    // Handler for when a user wants to make an offer
-    const handleMakeOffer = (lunchboxName) => {
-        console.log(`Making offer for ${lunchboxName}'s lunchbox`);
-        // TODO: Navigate to offer page or show offer modal
-        navigate(`/trading/${lunchboxName}`);
+    // Cleanup interval on unmount or when name changes
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
     };
+  }, [name]); // Re-run when name changes
 
-    // Handler for edit lunchbox button
-    const handleEditLunchbox = () => {
-        navigate("/");
-    };
+  // Handler for when a user wants to make an offer
+  const handleMakeOffer = (lunchboxName) => {
+    console.log(`Making offer for ${lunchboxName}'s lunchbox`);
+    // TODO: Navigate to offer page or show offer modal
+    navigate(`/trading/${lunchboxName}`);
+  };
 
-    // Handler for notification icon click
-    const handleNotificationClick = () => {
-        setShowOffersWidget(!showOffersWidget);
-    };
+  // Handler for edit lunchbox button
+  const handleEditLunchbox = () => {
+    navigate("/");
+  };
 
-    // Handler for seeing an offer
-    const handleSeeOffer = (offerId) => {
-        navigate(`/offers/${offerId}`);
-        setShowOffersWidget(false); // Close the widget after navigation
-    };
+  // Handler for notification icon click
+  const handleNotificationClick = () => {
+    setShowOffersWidget(!showOffersWidget);
+  };
 
-    //
+  // Handler for seeing an offer
+  const handleSeeOffer = (offerId) => {
+    navigate(`/offers/${offerId}`);
+    setShowOffersWidget(false); // Close the widget after navigation
+  };
 
-    return (
-        <div className="min-h-screen bg-beige pb-16">
-            <div className=" h-[124px] bg-beige-darker flex items-center px-4">
-                <img
-                    src={Logo}
-                    alt="Logo"
-                    className="h-auto max-h-[80px] object-contain"
-                />
-                <div className="flex-1 flex justify-center mr-160">
-                    <img
-                        src={longformBLT}
-                        alt="Long Form BLT"
-                        className="h-auto max-h-[100px] object-contain"
-                    />
-                </div>
-                <div className="w-[120px]"></div>
-            </div>
+  const handlePanic = () => {
+    navigate("/panic");
+  };
 
-            {/* Notification icon on the left side */}
-            <div className="absolute top-[124px] left-6 z-50 mt-4">
-                <NotificationIcon
-                    count={offers.length}
-                    hasNewNotification={hasNewOffer}
-                    onClick={handleNotificationClick}
-                />
-
-                {/* Offers Widget */}
-                <OffersWidget
-                    offers={offers}
-                    isVisible={showOffersWidget}
-                    onClose={() => setShowOffersWidget(false)}
-                    onSeeOffer={handleSeeOffer}
-                />
-            </div>
-
-            {/* Buttons on the right side */}
-            <div className="absolute top-[124px] right-6 z-50 mt-4 flex gap-2">
-                <Button onClick={fetchLunchboxes}>REFRESH</Button>
-                <Button onClick={handleEditLunchbox}>EDIT LUNCHBOX</Button>
-            </div>
-
-            {/* Lunchboxes with random colors and tilts - stacked vertically between notification and button */}
-            <div className="flex flex-col items-center justify-start mt-16 mx-4 px-20">
-                {lunchboxes.map((lunchbox) => (
-                    <div
-                        key={lunchbox.name}
-                        className="flex flex-col items-center mb-8"
-                    >
-                        {/* Name and avatar above lunchbox */}
-                        <div className="flex items-center mb-4 z-10 w-full">
-                            <img
-                                src={lunchbox.avatar}
-                                className="w-12 h-12 bg-white rounded-full border-2 border-black"
-                            />
-                            <p className="ml-3 font-semibold text-4xl">
-                                {`${lunchbox.name}'s Lunchbox`}
-                            </p>
-                        </div>
-
-                        {/* Lunchbox */}
-                        <div className="relative my-8">
-                            <Lunchbox
-                                primaryColor={lunchbox.colors.primaryColor}
-                                tilt={lunchbox.tilt}
-                                size="medium"
-                                items={lunchbox.lunchbox}
-                                boxColor={lunchbox.colors.boxColor}
-                                layout={lunchbox.layout}
-                                onMakeOffer={() =>
-                                    handleMakeOffer(lunchbox.name)
-                                }
-                            />
-                        </div>
-                    </div>
-                ))}
-            </div>
+  return (
+    <div className="min-h-screen bg-beige pb-16">
+      <div className=" h-[124px] bg-beige-darker flex items-center px-4">
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-auto max-h-[80px] object-contain"
+        />
+        <div className="flex-1 flex justify-center mr-160">
+          <img
+            src={longformBLT}
+            alt="Long Form BLT"
+            className="h-auto max-h-[100px] object-contain"
+          />
         </div>
-    );
+        <div className="w-[120px]"></div>
+      </div>
+
+      {/* Notification icon on the left side */}
+      <div className="absolute top-[124px] left-6 z-50 mt-4">
+        <NotificationIcon
+          count={offers.length}
+          hasNewNotification={hasNewOffer}
+          onClick={handleNotificationClick}
+        />
+
+        {/* Offers Widget */}
+        <OffersWidget
+          offers={offers}
+          isVisible={showOffersWidget}
+          onClose={() => setShowOffersWidget(false)}
+          onSeeOffer={handleSeeOffer}
+        />
+      </div>
+
+      {/* Buttons on the right side */}
+      <div className="absolute top-[124px] right-6 z-50 mt-4 flex gap-2">
+        <Button onClick={fetchLunchboxes}>REFRESH</Button>
+        <Button onClick={handleEditLunchbox}>EDIT LUNCHBOX</Button>
+      </div>
+
+      {/* Lunchboxes with random colors and tilts - stacked vertically between notification and button */}
+      <div className="flex flex-col items-center justify-start mt-16 mx-4 px-20">
+        {lunchboxes.map((lunchbox) => (
+          <div key={lunchbox.name} className="flex flex-col items-center mb-8">
+            {/* Name and avatar above lunchbox */}
+            <div className="flex items-center mb-4 z-10 w-full">
+              <img
+                src={lunchbox.avatar}
+                className="w-12 h-12 bg-white rounded-full border-2 border-black"
+              />
+              <p className="ml-3 font-semibold text-4xl">
+                {`${lunchbox.name}'s Lunchbox`}
+              </p>
+            </div>
+
+            {/* Lunchbox */}
+            <div className="relative my-8">
+              <Lunchbox
+                primaryColor={lunchbox.colors.primaryColor}
+                tilt={lunchbox.tilt}
+                size="medium"
+                items={lunchbox.lunchbox}
+                boxColor={lunchbox.colors.boxColor}
+                layout={lunchbox.layout}
+                onMakeOffer={() => handleMakeOffer(lunchbox.name)}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="fixed bottom-10 right-13 z-50">
+        <img
+          src={Panic}
+          alt="Panic"
+          className="cursor-pointer w-20 h-20 drop-shadow-xl"
+          style={{
+            filter: "drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2))",
+          }}
+          onClick={handlePanic}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default ListingsPage;
