@@ -5,6 +5,7 @@ import ListingsPage from "./pages/ListingsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import TradingPage from "./pages/TradingPage";
 import OffersPage from "./pages/OffersPage";
+import PanicPage from "./pages/PanicPage";
 
 import { UserProvider } from "./context/UserProvider";
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/listings" element={<ListingsPage />} />
         <Route path="/trading" element={<TradingPage />} />
         <Route path="/offers/:id" element={<OffersPage />} />
+        <Route path="/panic" element={<PanicPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </UserProvider>
