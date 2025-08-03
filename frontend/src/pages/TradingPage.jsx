@@ -241,7 +241,7 @@ const TradingPage = () => {
           {/* Name's Lunchbox */}
           <div className="flex flex-col items-center mr-5 -mt-10">
             <h2 className="text-4xl font-bold text-center mb-2 -mt-2 z-30 relative pointer-events-none select-none">
-              Name's Lunchbox
+              {`${otherName}'s Lunchbox`}
             </h2>
             <div className="bg-teal rounded-3xl w-125 h-110 shadow-md ml-5 flex items-center justify-center relative overflow-hidden">
               {/* Two small lighter teal boxes on the left */}

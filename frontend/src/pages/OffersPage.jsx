@@ -47,7 +47,7 @@ const OffersPage = () => {
 
         <div className="flex flex-row gap-7">
           <div className="flex flex-col items-center">
-            <p className="text-black text-xl font-bold mb-2">Offer</p>
+            <p className="text-black text-xl font-bold mb-2">Items you will receive</p>
             <div className="bg-white w-[300px] h-[350px] rounded-3xl text-black p-4">
               <div className="grid grid-cols-2 gap-4">
                 {(offer?.offering ?? []).map(item => {
@@ -65,7 +65,7 @@ const OffersPage = () => {
           </div>
 
           <div className="flex flex-col items-center">
-            <p className="text-black text-xl font-bold mb-2">Request</p>
+            <p className="text-black text-xl font-bold mb-2">Items you will give</p>
             <div className="bg-white w-[300px] h-[350px] rounded-3xl p-4">
               <div className="grid grid-cols-2 gap-4">
                 {(offer?.wanting ?? []).map(item => {
@@ -88,10 +88,10 @@ const OffersPage = () => {
     </div>
 
     <div className="flex justify-center mt-4 gap-4">
-      <button onClick={decline} className="bg-orange text-black text-3xl px-4 py-2 w-[300px] h-[60px] rounded-2xl hover:bg-orange-darker">
+      <button onClick={decline} className="bg-orange text-black text-2xl px-4 py-2 w-[250px] h-[50px] rounded-2xl hover:bg-orange-darker">
         DECLINE
       </button>
-      <button onClick={accept} className="bg-yellow text-black text-3xl px-4 py-2 w-[300px] h-[60px] rounded-2xl hover:bg-yellow-darker">
+      <button onClick={accept} className="bg-yellow text-black text-2xl px-4 py-2 w-[250px] h-[50px] rounded-2xl hover:bg-yellow-darker">
         ACCEPT
       </button>
     </div>

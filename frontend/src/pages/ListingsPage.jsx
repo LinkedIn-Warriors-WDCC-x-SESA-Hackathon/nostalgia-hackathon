@@ -197,8 +197,8 @@ const ListingsPage = () => {
                         {/* Name and avatar above lunchbox */}
                         <div className="flex items-center mb-4 z-10 w-full">
                             <div className="w-12 h-12 bg-white rounded-full border-2 border-gray-200"></div>
-                            <p className="ml-3 font-semibold text-lg">
-                                {lunchbox.name}
+                            <p className="ml-3 font-semibold text-4xl">
+                                {`${lunchbox.name}'s Lunchbox`}
                             </p>
                         </div>
 
