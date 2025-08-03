@@ -28,7 +28,7 @@ const ListingsPage = () => {
 
     // Function to get random tilt
     const getRandomTilt = () => {
-        const tilts = [-7, -5, -3, 3, 5, 7]; // left, right
+        const tilts = [-3, -2, -1, 1, 2, 3]; // left, right
         const randomIndex = Math.floor(Math.random() * tilts.length);
         return tilts[randomIndex];
     };
@@ -92,15 +92,31 @@ const ListingsPage = () => {
             {/* Lunchboxes with random colors and tilts - stacked vertically between notification and button */}
             <div className="flex flex-col items-center justify-start mt-16 mx-4 px-20">
                 {lunchboxes.map((lunchbox) => (
-                    <div className={"mt-32"} key={lunchbox.name}>
-                        <Lunchbox
-                            primaryColor={lunchbox.colors.primaryColor}
-                            tilt={lunchbox.tilt}
-                            size="medium"
-                            items={lunchbox.lunchbox}
-                            boxColor={lunchbox.colors.boxColor}
-                            onMakeOffer={() => handleMakeOffer(lunchbox.name)}
-                        />
+                    <div
+                        key={lunchbox.name}
+                        className="flex flex-col items-center mb-8"
+                    >
+                        {/* Name and avatar above lunchbox */}
+                        <div className="flex items-center mb-4 z-10 w-full">
+                            <div className="w-12 h-12 bg-white rounded-full border-2 border-gray-200"></div>
+                            <p className="ml-3 font-semibold text-lg">
+                                {lunchbox.name}
+                            </p>
+                        </div>
+
+                        {/* Lunchbox */}
+                        <div className="relative my-8">
+                            <Lunchbox
+                                primaryColor={lunchbox.colors.primaryColor}
+                                tilt={lunchbox.tilt}
+                                size="medium"
+                                items={lunchbox.lunchbox}
+                                boxColor={lunchbox.colors.boxColor}
+                                onMakeOffer={() =>
+                                    handleMakeOffer(lunchbox.name)
+                                }
+                            />
+                        </div>
                     </div>
                 ))}
 
