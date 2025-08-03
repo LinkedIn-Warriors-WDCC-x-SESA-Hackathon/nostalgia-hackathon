@@ -196,7 +196,7 @@ const Lunchbox = ({
             >
                 <Button
                     onClick={onMakeOffer}
-                    className="bg-orange hover:bg-orange-darker text-black font-bold px-8 py-4 text-lg"
+                    className="bg-orange hover:bg-orange-darker text-black font-bold px-8 py-4 text-lg cursor-pointer"
                 >
                     MAKE OFFER
                 </Button>
