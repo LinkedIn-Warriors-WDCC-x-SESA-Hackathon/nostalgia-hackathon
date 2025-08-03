@@ -128,30 +128,6 @@ const ListingsPage = () => {
                         </div>
                     </div>
                 ))}
-
-                {/* Blue lunchbox - tilted left */}
-                <div className="mt-24">
-                    <Lunchbox
-                        primaryColor="bg-teal-darker"
-                        tilt={-5}
-                        size="medium"
-                        items={["egg", "hummus", "celery", "potatoChips"]}
-                        boxColor="bg-teal"
-                        onMakeOffer={() => handleMakeOffer("Alice")}
-                    />
-                </div>
-
-                {/* Pink lunchbox - tilted right - extra spacing */}
-                <div className="mt-32">
-                    <Lunchbox
-                        primaryColor="bg-[#DF9D9E]"
-                        tilt={5}
-                        size="medium"
-                        items={["cheese", "apple", "juice", "carrot"]}
-                        boxColor="bg-[#F3D4D4]"
-                        onMakeOffer={() => handleMakeOffer("Bob")}
-                    />
-                </div>
             </div>
         </div>
     );
