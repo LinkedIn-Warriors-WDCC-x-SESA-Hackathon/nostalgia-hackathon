@@ -6,10 +6,12 @@ import NotificationIcon from "../components/NotificationIcon";
 import Lunchbox from "../components/Lunchbox";
 import { useState, useEffect } from "react";
 import { getAllLunchBoxes } from "../api/lunchboxApi";
+import { useNavigate } from "react-router-dom";
 
 const ListingsPage = () => {
     const [lunchboxes, setLunchboxes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     // Define three color combinations
     const colorCombinations = [
@@ -67,6 +69,7 @@ const ListingsPage = () => {
     const handleMakeOffer = (lunchboxName) => {
         console.log(`Making offer for ${lunchboxName}'s lunchbox`);
         // TODO: Navigate to offer page or show offer modal
+        navigate(`/trading/${lunchboxName}`);
     };
 
     return (
