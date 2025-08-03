@@ -8,8 +8,10 @@ import Button from "../components/Button";
 import DisplayNameAlert from "../components/DisplayNameAlert";
 import { submitLunchbox } from "../api/lunchboxApi";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/useUser";}
 
 const SetupPage = () => {
+    const {setName} = useUser()
     
     const foodItems = [
         { id: "apple", name: "Apple" },
@@ -65,6 +67,8 @@ const SetupPage = () => {
 
             // Submit the lunchbox to the API
             await submitLunchbox(displayName, lunchboxItems);
+            setName(displayName)
+
 
             // Close the modal and navigate to listings page
             setShowDisplayNameAlert(false);
